@@ -1,0 +1,29 @@
+.header_block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 75px;
+  flex-wrap: wrap;
+
+  .logo_block {
+    display: flex;
+    align-items: center;
+    width: 30%;
+  }
+
+  .search_block {
+    width: 40%;
+  }
+
+  .user_block {
+    width: 30%;
+  }
+
+  nav {
+    width: 100%;
+  }
+}
+
+.navbar_block {
+  display: flex;
+}
