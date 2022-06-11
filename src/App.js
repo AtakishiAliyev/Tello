@@ -1,8 +1,9 @@
+import React from 'react'
 import Home from './container/Home/Home';
 
 function App() {
   return (
-    <div className="Ap">
+    <div className="">
       <Home />
     </div>
   );

@@ -1,29 +1,73 @@
+@import "../../style/sass-utils/variable.scss";
+
 .header_block {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 75px;
   flex-wrap: wrap;
+  padding: 20px 75px 0;
+  border-bottom: 1px solid $clr-brand;
 
   .logo_block {
     display: flex;
     align-items: center;
-    width: 30%;
+    width: 20%;
+    // background-color: red;
+
+    .title {
+      font-size: 34px;
+      line-height: 40px;
+      color: $clr-brand;
+      margin-left: 15px;
+    }
   }
 
   .search_block {
-    width: 40%;
+    width: 60%;
+    max-width: 600px;
   }
 
   .user_block {
-    width: 30%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    & > .user_block-item + .user_block-item {
+      margin-left: 24px;
+    }
   }
 
   nav {
     width: 100%;
-  }
-}
+    margin-top: 32px;
 
-.navbar_block {
-  display: flex;
+    .navbar_block {
+      display: flex;
+      font-size: $fs-medium;
+      text-transform: capitalize;
+
+      & > li + li {
+        margin-left: 56px;
+      }
+
+      li {
+        padding: 0 0 12px;
+
+        &:hover > .dropdown_menu_block {
+          border-top: 1px solid #2dd06e;
+          display: flex;
+        }
+      }
+
+      li a {
+        color: $clr-gray-1;
+
+        &:hover {
+          color: $clr-succes;
+        }
+      }
+    }
+  }
 }

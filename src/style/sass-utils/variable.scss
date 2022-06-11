@@ -1,0 +1,52 @@
+// * Font family
+$ff-main: "Euclid Circular A", sans-serif;
+
+// * Font-sizes
+$fs-regular: 1.6rem;
+$fs-medium: 1.4rem;
+$fs-small: 1.2rem;
+$fs-tiny: 1rem;
+
+// * Font-weights
+$fw-300: 300;
+$fw-400: 400;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+
+// * Colors
+$clr-brand: #2dd06e;
+$vlr-brand-disabled: #abfab3;
+$clr-gray-1: #333333;
+$clr-gray-2: #4f4f4f;
+$clr-gray-3: #828282;
+$clr-gray-4: #bdbdbd;
+$clr-gray-5: #e0e0e0;
+$clr-gray-6: #f2f2f2;
+$clr-info: #0095ff;
+$clr-succes: #00d68f;
+$clr-warning: #ffaa00;
+$clr-danger: #ff3d71;
+$clr-disable: #c5cee0;
+$clr-primary: #3366ff;
+$clr-link: #2d9cdb;
+
+// * Hover colors
+$hover-brand: #5de285;
+$hover-info: #42aaff;
+$hover-succes: #2ce59b;
+$hover-warning: #ffc94d;
+$hover-danger: #ff708d;
+$hover-primary: #598bff;
+
+// * Pressed colors
+$pressed-brand: #20b269;
+$pressed-info: #42aaff;
+$pressed-succes: #2ce59b;
+$pressed-warning: #ffc94d;
+$pressed-danger: #ff708d;
+
+// * Breakpoint sizes
+$mobile: 576px;
+$tablet: 768px;
+$desktop: 992px;
