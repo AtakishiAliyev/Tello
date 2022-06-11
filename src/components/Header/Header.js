@@ -9,6 +9,7 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu'
 
 const Header = ({ categories }) => {
     const [hoverCategoryId, setHoverCategoryId] = useState()
+    const [navbarStatus, setNavbarStatus] = useState(false)
 
     function gethoverCategoryId(data) {
         if (data.children.length > 0 && window.innerWidth > 576) {
@@ -19,7 +20,7 @@ const Header = ({ categories }) => {
     return (
         <div className='header-wrapper'>
             <div className='header_block'>
-                <div className='menu-hamburger'>
+                <div onClick={() => { setNavbarStatus(true) }} className='menu-hamburger'>
                     <svg width="21" height="14" viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19.3 13.6H0.8C0.4 13.6 0 13.2 0 12.8C0 12.4 0.3 12 0.8 12H19.3C19.7 12 20.1 12.3 20.1 12.8C20.1 13.3 19.7 13.6 19.3 13.6Z" fill="#1D2123" />
                         <path d="M19.3 1.6H0.8C0.4 1.6 0 1.2 0 0.8C0 0.4 0.3 0 0.8 0H19.3C19.7 0 20 0.4 20 0.8C20 1.2 19.7 1.6 19.3 1.6Z" fill="#1D2123" />
@@ -42,7 +43,20 @@ const Header = ({ categories }) => {
                         <img src={basket_icon} alt="basket" />
                     </a>
                 </div>
-                <nav>
+                <nav className={`${navbarStatus && 'open-navbar'}`}>
+                    <div className='mobile-navbar-header'>
+                        <div onClick={() => { setNavbarStatus(false) }} className='menu_close'>
+                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.825 20.025C0.625 20.025 0.425 19.925 0.225 19.825C-0.075 19.525 -0.075 19.025 0.225 18.725L18.625 0.225C18.925 -0.075 19.425 -0.075 19.725 0.225C20.025 0.525 20.025 1.025 19.725 1.325L1.425 19.725C1.225 19.925 1.025 20.025 0.825 20.025Z" fill="#1D2123" />
+                                <path d="M19.225 20.025C19.025 20.025 18.825 19.925 18.625 19.825L0.225 1.42501C-0.075 1.12501 -0.075 0.625006 0.225 0.325006C0.525 0.0250061 1.025 0.0250061 1.325 0.325006L19.725 18.725C20.025 19.025 20.025 19.525 19.725 19.825C19.625 19.925 19.425 20.025 19.225 20.025Z" fill="#1D2123" />
+                            </svg>
+                        </div>
+                        <div className='mobile-navbar-logo'>
+                            <img src={logo} alt="logo" />
+                            <h1 className='title'>Tello</h1>
+                        </div>
+                    </div>
+
                     <ul className='navbar_block'>
                         {
                             categories.map(category => {
