@@ -1,29 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './DropdownMenu.scss'
 
-const DropdownMenu = ({ categories, hoverEl }) => {
-    let category = null
+const DropdownMenu = ({ categories, hoverCategoryId }) => {
+    const [subCategoryParent, setSubCategoryParent] = useState([])
 
-    if (categories.id === hoverEl) {
-        category = categories.children
-    }
+    useEffect(() => {
+        if (categories.id === hoverCategoryId) {
+            setSubCategoryParent(categories.children)
+        }
+    }, [hoverCategoryId, categories.id, categories.children])
 
     return (
         <div className='dropdown_menu_block'>
             <div className='dropdown_menu-list'>
                 {
-                    category && category.map(item => {
+                    subCategoryParent.map(category => {
                         return (
-                            <div key={item.id} className='dropdown_menu-list-item'>
-                                <h3 className={`${item.children.length === 0 ? 'sub-title' : ''}`}>
-                                    <a href="/"> {item.name} </a>
+                            <div key={category.id} className='dropdown_menu-list-item'>
+                                <h3 className={`${category.children.length === 0 ? 'sub-title' : ''}`}>
+                                    <a href="/"> {category.name} </a>
                                 </h3>
                                 <ul>
                                     {
-                                        item.children.length > 0 && item.children.map(c => {
+                                        category.children.length > 0 && category.children.map(last => {
                                             return (
-                                                <li key={c.id}>
-                                                    <a href="/">{c.name}</a>
+                                                <li key={last.id}>
+                                                    <a href="/">{last.name}</a>
                                                 </li>
                                             )
                                         })
@@ -36,7 +38,7 @@ const DropdownMenu = ({ categories, hoverEl }) => {
             </div>
             <div className='dropdown_menu-banner'>
                 {
-                    categories.id === hoverEl && categories.assets.length > 0
+                    categories.id === hoverCategoryId && categories.assets.length > 0
                         ? <img src={categories.assets[0].url} alt="menu banner" />
                         : ''
                 }
