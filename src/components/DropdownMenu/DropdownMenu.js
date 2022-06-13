@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './DropdownMenu.scss'
 
-const DropdownMenu = ({ categories, hoverCategoryId }) => {
+const DropdownMenu = ({ categories, hoverCategoryId, openId }) => {
     const [subCategoryParent, setSubCategoryParent] = useState([])
 
     useEffect(() => {
@@ -11,7 +11,7 @@ const DropdownMenu = ({ categories, hoverCategoryId }) => {
     }, [hoverCategoryId, categories.id, categories.children])
 
     return (
-        <div className={`${categories.id === hoverCategoryId ? 'd-flex' : ''} dropdown_menu_block`} >
+        <div className={`${categories.id === openId ? 'd-flex' : ''} dropdown_menu_block`} >
             <div className='dropdown_menu-list'>
 
                 {

@@ -10,6 +10,7 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu'
 const Header = ({ categories }) => {
     const [hoverCategoryId, setHoverCategoryId] = useState()
     const [navbarStatus, setNavbarStatus] = useState(false)
+    const [openId, setOpenId] = useState()
 
     function gethoverCategoryId(data) {
         if (data.children.length > 0 && window.innerWidth > 576) {
@@ -20,7 +21,11 @@ const Header = ({ categories }) => {
     function showSubCategory(data) {
         if (data.children.length > 0) {
             setHoverCategoryId(data.id)
-            
+            if (openId === data.id) {
+                setOpenId(null)
+            } else {
+                setOpenId(data.id)
+            }
         }
     }
 
@@ -74,7 +79,7 @@ const Header = ({ categories }) => {
                                         {
                                             category.children.length > 0
                                             && <>
-                                                <div onClick={() => { showSubCategory(category) }} className='mobile_chevron_right'>
+                                                <div onClick={() => { showSubCategory(category) }} className={`mobile_chevron_right ${category.id === openId ? 'rotate-90' : ''}`}>
                                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M10.5002 17C10.2442 17 9.98825 16.902 9.79325 16.707C9.40225 16.316 9.40225 15.684 9.79325 15.293L13.0982 11.988L9.91825 8.695C9.53525 8.297 9.54625 7.664 9.94325 7.281C10.3413 6.898 10.9742 6.909 11.3572 7.305L15.2193 11.305C15.5983 11.698 15.5933 12.321 15.2073 12.707L11.2072 16.707C11.0122 16.902 10.7563 17 10.5002 17Z" fill="#2E3A59" />
                                                     </svg>
@@ -82,6 +87,7 @@ const Header = ({ categories }) => {
                                                 <DropdownMenu
                                                     categories={category}
                                                     hoverCategoryId={hoverCategoryId}
+                                                    openId={openId}
                                                 />
                                             </>
                                         }
