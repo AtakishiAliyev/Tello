@@ -32,6 +32,7 @@ const Home = () => {
 
             response.data.data.map(item => {
                 setCategories(item.children)
+                return false
             })
         }
 
