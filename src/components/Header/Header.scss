@@ -80,6 +80,10 @@
   .mobile-navbar-header {
     display: none;
   }
+
+  .menu-hamburger {
+    display: none;
+  }
 }
 
 @media (max-width: $mobile) {
@@ -123,7 +127,7 @@
       width: 100%;
       height: 100vh;
       overflow-y: scroll;
-      transition: 0.3s; 
+      transition: 0.3s;
 
       .navbar_block {
         flex-direction: column;
@@ -143,27 +147,11 @@
           justify-content: space-between;
           flex-wrap: wrap;
 
-          .dropdown_menu_block {
-            width: 100%;
-            position: static;
-            padding: 16px 16px;
-            flex-direction: column;
-
-            .dropdown_menu-list {
-              .dropdown_menu-list-item {
-                width: 100%;
-              }
-            }
-          }
-
-          .dropdown_menu-banner {
-            margin-top: 16px;
-          }
-
           .mobile_chevron_right {
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.3s;
           }
         }
       }

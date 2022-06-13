@@ -58,3 +58,27 @@
     }
   }
 }
+
+@media (max-width: $mobile) {
+  .dropdown_menu_block {
+    width: 100%;
+    position: static;
+    padding: 16px 16px;
+    flex-direction: column;
+    transition: 0.3s;
+
+    .dropdown_menu-list {
+      .dropdown_menu-list-item {
+        width: 100%;
+      }
+    }
+  }
+
+  .dropdown_menu-banner {
+    margin-top: 16px;
+  }
+
+  .dropdown_menu-banner:empty {
+    display: none;
+  }
+}

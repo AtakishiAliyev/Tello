@@ -18,3 +18,11 @@ a {
 .active-link {
   color: $clr-succes !important;
 }
+
+.d-flex {
+  display: flex !important;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}

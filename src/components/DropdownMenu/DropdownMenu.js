@@ -11,7 +11,7 @@ const DropdownMenu = ({ categories, hoverCategoryId }) => {
     }, [hoverCategoryId, categories.id, categories.children])
 
     return (
-        <div className='dropdown_menu_block'>
+        <div className="dropdown_menu_block">
             <div className='dropdown_menu-list'>
                 {
                     subCategoryParent.map(category => {
