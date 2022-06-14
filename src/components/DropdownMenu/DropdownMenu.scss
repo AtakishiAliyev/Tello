@@ -9,6 +9,8 @@
   display: none;
   align-items: flex-start;
   justify-content: space-between;
+  z-index: 100;
+  background-color: white;
 
   .dropdown_menu-list {
     flex: 1;
