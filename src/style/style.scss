@@ -15,6 +15,16 @@ a {
   text-decoration: none;
 }
 
+.container {
+  width: 90%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  width: 100%;
+}
+
 .active-link {
   color: $clr-succes !important;
 }
