@@ -36,3 +36,9 @@ a {
 .rotate-90 {
   transform: rotate(90deg);
 }
+
+@media (max-width: $mobile) {
+  .container {
+    width: 90%;
+  }
+}

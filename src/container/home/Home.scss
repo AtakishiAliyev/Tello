@@ -1,0 +1,21 @@
+@import "../../style/sass-utils/variable.scss";
+
+.banner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+
+  .banner_block {
+    width: 50%;
+  }
+}
+
+@media (max-width: $mobile) {
+  .banner-wrapper {
+    flex-direction: column;
+    .banner_block {
+      width: 100%;
+    }
+  }
+}

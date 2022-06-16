@@ -35,3 +35,9 @@
   height: auto;
   padding: 24px 0;
 }
+
+.mobile_slick-slider {
+  .slick-list {
+    padding: 0 20% 0 0 !important;
+  }
+}

@@ -4,6 +4,9 @@ import axios from 'axios'
 import Header from '../../components/Header/Header'
 import Slider from '../../components/Slider/Slider'
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider'
+import Banner from '../../components/Banner/Banner'
+import iphone_1 from '../../images/iphon_1.png'
+import iphone_11 from '../../images/iphone_11.png'
 
 const Home = () => {
     const [categories, setCategories] = useState([])
@@ -45,9 +48,14 @@ const Home = () => {
         <>
             <Header categories={categories} />
             <Slider />
-            <ProductsSlider />
-            <ProductsSlider />
-            <ProductsSlider />
+            <ProductsSlider categoryName={'Ən çox satılan məhsullar'} />
+            <div className='container'>
+                <div className='banner-wrapper'>
+                    <Banner img={iphone_1} />
+                    <Banner img={iphone_11} color={'#f2f2f2'} />
+                </div>
+            </div>
+            <ProductsSlider categoryName={'Yeni gələn məhsullar'} />
         </>
     )
 }
