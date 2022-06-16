@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../../components/Header/Header'
 import './Home.scss'
 import axios from 'axios'
+import Header from '../../components/Header/Header'
+import Slider from '../../components/Slider/Slider'
+import ProductsSlider from '../../components/ProductsSlider/ProductsSlider'
 
 const Home = () => {
     const [categories, setCategories] = useState([])
@@ -42,6 +44,10 @@ const Home = () => {
     return (
         <>
             <Header categories={categories} />
+            <Slider />
+            <ProductsSlider />
+            <ProductsSlider />
+            <ProductsSlider />
         </>
     )
 }

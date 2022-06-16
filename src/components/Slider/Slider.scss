@@ -47,6 +47,10 @@
   }
 }
 
+.slick-dots {
+  bottom: 10px !important;
+}
+
 @media (max-width: $mobile) {
   .slider-item {
     display: flex !important;
@@ -61,6 +65,7 @@
       order: 2;
       margin: 0 auto;
       text-align: center;
+      margin-bottom: 10px;
 
       h3 {
         font-size: 3.2rem;

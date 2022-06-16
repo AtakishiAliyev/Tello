@@ -1,0 +1,37 @@
+@import "../../style/sass-utils/variable.scss";
+
+.products-slider_block {
+  padding: 35px 0;
+  overflow: hidden;
+}
+
+.products-slider_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  a {
+    font-size: $fs-medium;
+    line-height: 1.6rem;
+    display: flex;
+    align-items: center;
+    color: $clr-gray-1;
+
+    img {
+      margin-left: 8px;
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    font-weight: $fw-500;
+    color: $clr-gray-1;
+  }
+}
+
+.products-slider_item {
+  height: auto;
+  padding: 24px 0;
+}
