@@ -2,8 +2,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ProductsSlider.scss'
-import chevron_right from '../../images/chevron-right.png'
-import Product from '../Product/Product';
+import chevron_right from '../../../images/chevron-right.png'
+import Product from '../../Product/Product';
 
 const ProductsSlider = ({ categoryName }) => {
     const settings = {
@@ -26,7 +26,7 @@ const ProductsSlider = ({ categoryName }) => {
     };
 
     return (
-        <div className='container products-slider_block'>
+        <div className='products-slider_block'>
             <div className='products-slider_title'>
                 <h2> {categoryName} </h2>
                 <a href="/">

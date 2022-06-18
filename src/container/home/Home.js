@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react'
 import './Home.scss'
 import axios from 'axios'
 import Header from '../../components/Header/Header'
-import Slider from '../../components/Slider/Slider'
-import ProductsSlider from '../../components/ProductsSlider/ProductsSlider'
-import Banner from '../../components/Banner/Banner'
+import Slider from '../../components/Home/Slider/Slider'
+import ProductsSlider from '../../components/Home/ProductsSlider/ProductsSlider'
+import Banner from '../../components/Home/Banner/Banner'
+import CategoryCard from '../../components/Home/CategoryCard/CategoryCard'
+import Advantage from '../../components/Home/Advantage/Advantage'
+// !Images
 import iphone_1 from '../../images/iphon_1.png'
 import iphone_11 from '../../images/iphone_11.png'
+import watch from '../../images/watch.png'
+import image6xiaomi from '../../images/image6xiaomi.png'
+import image6 from '../../images/image6.png'
 
 const Home = () => {
     const [categories, setCategories] = useState([])
@@ -48,14 +54,21 @@ const Home = () => {
         <>
             <Header categories={categories} />
             <Slider />
-            <ProductsSlider categoryName={'Ən çox satılan məhsullar'} />
             <div className='container'>
+                <ProductsSlider categoryName={'Ən çox satılan məhsullar'} />
+                <ProductsSlider categoryName={'Yeni gələn məhsullar'} />
                 <div className='banner-wrapper'>
                     <Banner img={iphone_1} />
                     <Banner img={iphone_11} color={'#f2f2f2'} />
                 </div>
+                <ProductsSlider categoryName={'Yeni gələn aksesuarlar'} />
+                <div className='category-card-wrapper'>
+                    <CategoryCard image={image6xiaomi} />
+                    <CategoryCard image={watch} />
+                    <CategoryCard image={image6} />
+                </div>
+                <Advantage />
             </div>
-            <ProductsSlider categoryName={'Yeni gələn məhsullar'} />
         </>
     )
 }

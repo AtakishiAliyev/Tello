@@ -1,8 +1,8 @@
-@import "../../style/sass-utils/variable.scss";
+@import "../../../style/sass-utils/variable.scss";
 
 .slider-item {
   height: calc(100vh - 130px);
-  background-image: url("../../images/slider_bg.png");
+  background-image: url("../../../images/slider_bg.png");
   background-position: 100% 20%;
   background-repeat: no-repeat;
   background-size: cover;

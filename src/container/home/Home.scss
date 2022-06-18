@@ -11,11 +11,52 @@
   }
 }
 
+.category-card-wrapper {
+  margin: 50px 0 100px;
+  display: grid;
+  gap: 20px;
+  grid-template-areas:
+    "first first second second"
+    "first first second second"
+    "first first third third"
+    "first first third third";
+
+  .category-card_block:nth-child(1) {
+    grid-area: first;
+    min-height: 400px;
+  }
+  .category-card_block:nth-child(2) {
+    grid-area: second;
+    height: 300px;
+  }
+  .category-card_block:nth-child(3) {
+    grid-area: third;
+    height: 350px;
+  }
+}
+
 @media (max-width: $mobile) {
   .banner-wrapper {
     flex-direction: column;
     .banner_block {
       width: 100%;
+    }
+  }
+
+  .category-card-wrapper {
+    grid-template-areas:
+      "first first first first"
+      "second second second second"
+      "third third third third";
+
+    .category-card_block:nth-child(1) {
+      height: 400px;
+    }
+    .category-card_block:nth-child(2) {
+      height: 400px;
+    }
+    .category-card_block:nth-child(3) {
+      height: 400px;
     }
   }
 }

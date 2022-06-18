@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Slider.scss'
-import slider_iphones from '../../images/slider.png'
-import slider_iphone12 from '../../images/iphone-12.png'
+import slider_iphones from '../../../images/slider.png'
+import slider_iphone12 from '../../../images/iphone-12.png'
 
 const data = [
     {

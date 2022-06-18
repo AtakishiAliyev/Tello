@@ -1,0 +1,30 @@
+@import "../../../style/sass-utils/variable.scss";
+
+.advantage-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  margin-bottom: 120px;
+
+  .advantage-item {
+    text-align: center;
+
+    h3 {
+      font-size: 2rem;
+      line-height: 2.8rem;
+      font-weight: 500;
+      margin: 25px 0;
+    }
+
+    p {
+      line-height: 2.4rem;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .advantage-wrapper {
+    flex-direction: column;
+  }
+}
