@@ -1,0 +1,45 @@
+@import "../../style/sass-utils/variable.scss";
+
+.product-list-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 140px;
+
+  .filter {
+    width: 25%;
+    max-width: 300px;
+    margin-right: 32px;
+  }
+
+  .product-list {
+    width: 75%;
+
+    .product-sort {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .total-product {
+        font-size: $fs-medium;
+        font-weight: $fw-500;
+        line-height: 2rem;
+        color: $clr-gray-1;
+      }
+    }
+
+    .products-wrapper {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 22px;
+
+      .product {
+        $cardWidth: 100%;
+        $cardGap: 220px;
+        width: calc(($cardWidth - $cardGap) / 3);
+        margin: 0 !important;
+      }
+    }
+  }
+}

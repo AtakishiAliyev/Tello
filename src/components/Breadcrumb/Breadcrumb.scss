@@ -1,0 +1,25 @@
+@import "../../style/sass-utils/variable.scss";
+
+.product-category-breadcrumb {
+  padding: 26px 0;
+
+  ul {
+    display: flex;
+    align-items: center;
+
+    li {
+      font-size: 1.4rem;
+      a {
+        display: flex;
+        align-items: center;
+        color: $clr-gray-2;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .product-category-breadcrumb {
+    display: none;
+  }
+}

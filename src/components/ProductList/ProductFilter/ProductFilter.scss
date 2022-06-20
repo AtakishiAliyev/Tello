@@ -1,0 +1,40 @@
+@import "../../../style/sass-utils/variable.scss";
+
+.filter-wrapper {
+  .MuiAccordion-root {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    .MuiAccordionSummary-root {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .MuiAccordionDetails-root {
+      padding: 32px 16px !important;
+    }
+
+    p {
+      font-size: $fs-medium;
+      font-weight: $fw-500;
+      font-family: $ff-main;
+      color: $clr-gray-2;
+      line-height: 2rem;
+    }
+
+    label {
+      font-weight: $fw-400 !important;
+      margin-left: 8px;
+    }
+
+    ul li {
+      display: flex;
+      align-items: center;
+    }
+
+    ul > li + li {
+      margin-top: 16px;
+    }
+  }
+}
