@@ -3,7 +3,6 @@ import './Banner.scss'
 
 
 const Banner = ({ img, color }) => {
-    console.log(color)
     return (
         <div className='banner_block' style={color && { backgroundColor: `${color}` }}>
             <div className='banner_text'>

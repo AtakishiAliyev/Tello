@@ -7,6 +7,8 @@ import ProductsSlider from '../../components/Home/ProductsSlider/ProductsSlider'
 import Banner from '../../components/Home/Banner/Banner'
 import CategoryCard from '../../components/Home/CategoryCard/CategoryCard'
 import Advantage from '../../components/Home/Advantage/Advantage'
+import Partners from '../../components/Home/Partners/Partners'
+import Footer from '../../components/Footer/Footer'
 // !Images
 import iphone_1 from '../../images/iphon_1.png'
 import iphone_11 from '../../images/iphone_11.png'
@@ -69,6 +71,8 @@ const Home = () => {
                 </div>
                 <Advantage />
             </div>
+            <Partners />
+            <Footer />
         </>
     )
 }

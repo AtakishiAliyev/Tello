@@ -41,3 +41,14 @@
     padding: 0 20% 0 0 !important;
   }
 }
+
+@media (max-width: $mobile) {
+  .products-slider_title h2 {
+    font-size: 1.6rem;
+  }
+
+  .product-name,
+  .product-color {
+    font-size: 1.4rem;
+  }
+}
