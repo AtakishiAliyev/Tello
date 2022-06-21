@@ -2,8 +2,9 @@ import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import '../ProductFilter/ProductFilter.scss'
+import '../ProductFilter/ProductFilter.scss';
+import plus_icon from '../../../images/plus.png';
+import minus_icon from '../../../images/minus.png';
 
 export default function ProductFilter() {
     const [expanded, setExpanded] = React.useState(false);
@@ -12,8 +13,6 @@ export default function ProductFilter() {
         setExpanded(isExpanded ? panel : false);
     };
 
-
-
     return (
         <div className='filter-wrapper'>
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -21,9 +20,10 @@ export default function ProductFilter() {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography>
-                        Brend
-                    </Typography>
+                    <div className='accordion-head'>
+                        <h3>Brend</h3>
+                        <img src={expanded === 'panel1' ? minus_icon : plus_icon} alt="plus" />
+                    </div>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ul>
@@ -51,7 +51,10 @@ export default function ProductFilter() {
                     aria-controls="panel2bh-content"
                     id="panel2bh-header"
                 >
-                    <Typography>Rəng</Typography>
+                    <div className='accordion-head'>
+                        <h3>Rəng</h3>
+                        <img src={expanded === 'panel2' ? minus_icon : plus_icon} alt="plus" />
+                    </div>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ul>
@@ -79,7 +82,10 @@ export default function ProductFilter() {
                     aria-controls="panel2bh-content"
                     id="panel2bh-header"
                 >
-                    <Typography>Yaddaş</Typography>
+                    <div className='accordion-head'>
+                        <h3>Yaddaş</h3>
+                        <img src={expanded === 'panel3' ? minus_icon : plus_icon} alt="plus" />
+                    </div>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ul>

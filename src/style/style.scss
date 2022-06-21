@@ -37,6 +37,26 @@ a {
   transform: rotate(90deg);
 }
 
+input[type="checkbox"] {
+  accent-color: #479e6a;
+  width: 20px;
+  height: 20px;
+}
+
+select {
+  background: url("../images/arrow_down.png") no-repeat 95% 50%;
+  padding: 10px 16px;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #4f4f4f;
+  appearance: none;
+  outline: none;
+  background-size: 20px 20px;
+  -webkit-padding-end: 35px;
+}
+
 @media (max-width: $mobile) {
   .container {
     width: 90%;

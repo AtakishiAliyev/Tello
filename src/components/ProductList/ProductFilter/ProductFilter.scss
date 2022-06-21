@@ -15,6 +15,13 @@
       padding: 32px 16px !important;
     }
 
+    .accordion-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     p {
       font-size: $fs-medium;
       font-weight: $fw-500;
@@ -26,6 +33,7 @@
     label {
       font-weight: $fw-400 !important;
       margin-left: 8px;
+      line-height: 2rem;
     }
 
     ul li {
