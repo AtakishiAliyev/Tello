@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import './Header.scss'
 import logo from '../../images/logo.png'
 import person_icon from '../../images/person.png'
@@ -7,7 +8,9 @@ import basket_icon from '../../images/shopping-cart.png'
 import Search from '../Search/Search'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
 
-const Header = ({ categories }) => {
+const Header = () => {
+    const { categories } = useSelector((state) => state)
+
     const [hoverCategoryId, setHoverCategoryId] = useState()
     const [navbarStatus, setNavbarStatus] = useState(false)
     const [openId, setOpenId] = useState()
@@ -72,7 +75,7 @@ const Header = ({ categories }) => {
 
                         <ul className='navbar_block'>
                             {
-                                categories.map(category => {
+                                categories.categories[0]?.children.map(category => {
                                     return (
                                         <li key={category.id} onMouseOver={() => { gethoverCategoryId(category) }}>
                                             <a href="/">{category.name}</a>
