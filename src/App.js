@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import { getCategories } from './redux/actions/categories';
-import { useDispatch } from 'react-redux';
-// import Home from './container/Home/Home'
+import React from 'react'
+import Home from './container/Home/Home';
 import ProductList from './container/ProductList/ProductList';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer'
+import { Route, Routes } from 'react-router-dom';
+
 
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getCategories())
-  }, [dispatch])
-
-
   return (
-    <div className="App">
-      {/* <Home /> */}
-      <ProductList />
-    </div>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products/:slug" element={<ProductList />} />
+        <Route />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 

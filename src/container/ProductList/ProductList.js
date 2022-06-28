@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ProductList.scss'
-import Header from '../../components/Header/Header'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import Product from '../../components/Product/Product'
-import Footer from '../../components/Footer/Footer'
 import ProductFilter from '../../components/ProductList/ProductFilter/ProductFilter'
+import { useParams } from 'react-router-dom';
+import { getProductsAsync } from '../../redux/actions/products';
+import { useDispatch, useSelector } from 'react-redux'
 
-const ProductList = ({ categories }) => {
+const ProductList = () => {
     const [filter, setFilter] = useState(false)
+    const dispatch = useDispatch()
+    const { products } = useSelector((state) => state)
+    const param = useParams()
+
+    useEffect(() => {
+        dispatch(getProductsAsync(param.slug))
+    }, [dispatch, param])
 
     return (
         <>
-            <Header categories={categories} />
             <div className='container'>
                 <Breadcrumb />
                 <div className='product-list-wrapper'>
@@ -26,7 +33,7 @@ const ProductList = ({ categories }) => {
                     </div>
                     <div className='product-list'>
                         <div className='product-sort'>
-                            <div className='total-product'>287 məhsul tapıldı</div>
+                            <div className='total-product'>{products?.products.length} məhsul tapıldı</div>
                             <div className='mobile-filter-sort'>
                                 <select>
                                     <option value="id_desc">Ən yenilər</option>
@@ -40,26 +47,17 @@ const ProductList = ({ categories }) => {
                             </div>
                         </div>
                         <div className='products-wrapper'>
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
-                            <Product />
+                            {
+                                products?.products.map(item => {
+                                    return (
+                                        <Product key={item.id} product={item} />
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     )
 }

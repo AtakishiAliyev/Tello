@@ -5,7 +5,7 @@ import './ProductsSlider.scss'
 import chevron_right from '../../../images/chevron-right.png'
 import Product from '../../Product/Product';
 
-const ProductsSlider = ({ categoryName }) => {
+const ProductsSlider = ({ categoryName, data }) => {
     const settings = {
         dots: false,
         arrows: false,
@@ -35,36 +35,15 @@ const ProductsSlider = ({ categoryName }) => {
                 </a>
             </div>
             <Slider {...settings}>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
-                <div className='products-slider_item'>
-                    <Product />
-                </div>
+                {
+                    data?.map(item => {
+                        return (
+                            <div key={item.id} className='products-slider_item'>
+                                <Product product={item} />
+                            </div>
+                        )
+                    })
+                }
             </Slider>
         </div>
     );

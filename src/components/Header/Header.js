@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import './Header.scss'
 import logo from '../../images/logo.png'
@@ -7,13 +7,21 @@ import heart_icon from '../../images/heart.png'
 import basket_icon from '../../images/shopping-cart.png'
 import Search from '../Search/Search'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
+import { getCategories } from '../../redux/actions/categories'
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
 
 const Header = () => {
+    const dispatch = useDispatch()
     const { categories } = useSelector((state) => state)
-
     const [hoverCategoryId, setHoverCategoryId] = useState()
     const [navbarStatus, setNavbarStatus] = useState(false)
     const [openId, setOpenId] = useState()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [dispatch])
 
     function gethoverCategoryId(data) {
         if (data.children.length > 0 && window.innerWidth > 576) {
@@ -45,7 +53,7 @@ const Header = () => {
                     </div>
                     <div className='logo_block'>
                         <img src={logo} alt="logo" />
-                        <h1 className='title'>Tello</h1>
+                        <Link to="/" className='title'>Tello</Link>
                     </div>
                     <Search />
                     <div className='user_block'>
@@ -78,7 +86,7 @@ const Header = () => {
                                 categories.categories[0]?.children.map(category => {
                                     return (
                                         <li key={category.id} onMouseOver={() => { gethoverCategoryId(category) }}>
-                                            <a href="/">{category.name}</a>
+                                            <div onClick={() => { navigate(`/products/${category.slug}`) }} >{category.name}</div>
 
                                             {
                                                 category.children.length > 0

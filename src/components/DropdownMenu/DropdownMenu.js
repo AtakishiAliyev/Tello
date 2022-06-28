@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './DropdownMenu.scss'
+import { useNavigate } from 'react-router-dom';
 
 const DropdownMenu = ({ categories, hoverCategoryId, openId }) => {
     const [subCategoryParent, setSubCategoryParent] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (categories.id === hoverCategoryId) {
@@ -19,14 +22,14 @@ const DropdownMenu = ({ categories, hoverCategoryId, openId }) => {
                         return (
                             <div key={category.id} className='dropdown_menu-list-item'>
                                 <h3 className={`${category.children.length === 0 ? 'sub-title' : ''}`}>
-                                    <a href="/"> {category.name} </a>
+                                    <div onClick={() => { navigate(`/products/${category.slug}`) }}> {category.name} </div>
                                 </h3>
                                 <ul>
                                     {
                                         category.children.length > 0 && category.children.map(last => {
                                             return (
                                                 <li key={last.id}>
-                                                    <a href="/">{last.name}</a>
+                                                    <div onClick={() => { navigate(`/products/${last.slug}`) }}>{last.name}</div>
                                                 </li>
                                             )
                                         })
