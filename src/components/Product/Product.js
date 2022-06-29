@@ -3,7 +3,6 @@ import './Product.scss'
 import azn from '../../images/azn.png'
 
 const Product = ({ product }) => {
-    console.log(product)
     return (
         <div className="product">
             <div className='product-img'>

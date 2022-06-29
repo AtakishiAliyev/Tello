@@ -6,6 +6,7 @@ import ProductFilter from '../../components/ProductList/ProductFilter/ProductFil
 import { useParams } from 'react-router-dom';
 import { getProductsAsync } from '../../redux/actions/products';
 import { useDispatch, useSelector } from 'react-redux'
+import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
 
 const ProductList = () => {
     const [filter, setFilter] = useState(false)
@@ -16,6 +17,8 @@ const ProductList = () => {
     useEffect(() => {
         dispatch(getProductsAsync(param.slug))
     }, [dispatch, param])
+
+    console.log(products)
 
     return (
         <>
@@ -33,7 +36,7 @@ const ProductList = () => {
                     </div>
                     <div className='product-list'>
                         <div className='product-sort'>
-                            <div className='total-product'>{products?.products.length} məhsul tapıldı</div>
+                            <div className='total-product'>{!products.loading ? products?.products.length : '0'} məhsul tapıldı</div>
                             <div className='mobile-filter-sort'>
                                 <select>
                                     <option value="id_desc">Ən yenilər</option>
@@ -48,11 +51,15 @@ const ProductList = () => {
                         </div>
                         <div className='products-wrapper'>
                             {
-                                products?.products.map(item => {
-                                    return (
-                                        <Product key={item.id} product={item} />
-                                    )
-                                })
+                                !products.loading
+                                    ? products?.products.map(item => {
+                                        return (
+                                            <Product key={item.id} product={item} />
+                                        )
+                                    })
+                                    : <div className='skeleton-wrapper skeleton-products'>
+                                        {[1, 2, 3, 4, 5].map((item, index) => <ProductSkeleton key={index} />)}
+                                    </div>
                             }
                         </div>
                     </div>
