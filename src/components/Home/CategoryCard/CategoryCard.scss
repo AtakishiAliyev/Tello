@@ -17,10 +17,11 @@
       margin: 20px 0;
     }
 
-    a {
+    p:nth-child(3) {
       color: $clr-link;
       display: flex;
       align-items: center;
+      cursor: pointer;
 
       svg {
         margin-top: 2px;

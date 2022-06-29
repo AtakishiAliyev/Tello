@@ -11,7 +11,7 @@
   justify-content: space-between;
   margin-bottom: 32px;
 
-  a {
+  p {
     font-size: $fs-medium;
     line-height: 1.6rem;
     display: flex;
@@ -43,8 +43,20 @@
 }
 
 @media (max-width: $mobile) {
+  .products-slider_block {
+    position: relative;
+  }
+
   .products-slider_title h2 {
     font-size: 1.6rem;
+  }
+
+  .products-slider_title p {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
   }
 
   .product-name,

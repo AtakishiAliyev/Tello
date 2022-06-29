@@ -5,8 +5,9 @@ import './ProductsSlider.scss'
 import chevron_right from '../../../images/chevron-right.png'
 import Product from '../../Product/Product';
 import ProductSkeleton from '../../Skeleton/ProductSkeleton';
+import { useNavigate } from 'react-router-dom';
 
-const ProductsSlider = ({ categoryName, data, loading }) => {
+const ProductsSlider = ({ categoryName, data, loading, slug }) => {
     const settings = {
         dots: false,
         arrows: false,
@@ -26,14 +27,16 @@ const ProductsSlider = ({ categoryName, data, loading }) => {
         ]
     };
 
+    const navigate = useNavigate();
+
     return (
         <div className='products-slider_block'>
             <div className='products-slider_title'>
                 <h2> {categoryName} </h2>
-                <a href="/">
+                <p onClick={() => { navigate(`/products/${slug}`) }}>
                     Hamısına bax
                     <img src={chevron_right} alt="right" />
-                </a>
+                </p>
             </div>
             {
                 !loading

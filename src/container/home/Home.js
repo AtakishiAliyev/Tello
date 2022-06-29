@@ -15,8 +15,6 @@ import image6 from '../../images/image6.png'
 import { getProductsAsync } from '../../redux/actions/products'
 import { useDispatch, useSelector } from 'react-redux'
 
-
-
 const Home = () => {
 
     const dispatch = useDispatch()
@@ -46,11 +44,13 @@ const Home = () => {
                 <ProductsSlider
                     categoryName={'Ən çox satılan məhsullar'}
                     loading={products.loading}
+                    slug={"mobil-telefonlar"}
                     data={sliderData('mobil-telefonlar')}
                 />
                 <ProductsSlider
                     categoryName={'Yeni gələn məhsullar'}
                     loading={products.loading}
+                    slug={"mobil-telefonlar"}
                     data={sliderData('mobil-telefonlar')}
                 />
                 <div className='banner-wrapper'>
@@ -60,12 +60,25 @@ const Home = () => {
                 <ProductsSlider
                     categoryName={'Yeni gələn aksesuarlar'}
                     loading={products.loading}
+                    slug={"aksesuarlar"}
                     data={sliderData('aksesuarlar')}
                 />
                 <div className='category-card-wrapper'>
-                    <CategoryCard image={image6xiaomi} />
-                    <CategoryCard image={watch} />
-                    <CategoryCard image={image6} />
+                    <CategoryCard
+                        categoryName={'Telefon'}
+                        slug={'mobil-telefonlar'}
+                        image={image6xiaomi}
+                    />
+                    <CategoryCard
+                        categoryName={'Smart Saat'}
+                        slug={'saatlar'}
+                        image={watch}
+                    />
+                    <CategoryCard
+                        categoryName={'Aksesuar'}
+                        slug={'aksesuarlar'}
+                        image={image6}
+                    />
                 </div>
                 <Advantage />
             </div>

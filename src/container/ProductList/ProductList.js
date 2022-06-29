@@ -18,8 +18,6 @@ const ProductList = () => {
         dispatch(getProductsAsync(param.slug))
     }, [dispatch, param])
 
-    console.log(products)
-
     return (
         <>
             <div className='container'>
@@ -58,7 +56,7 @@ const ProductList = () => {
                                         )
                                     })
                                     : <div className='skeleton-wrapper skeleton-products'>
-                                        {[1, 2, 3, 4, 5].map((item, index) => <ProductSkeleton key={index} />)}
+                                        {[1, 2, 3].map((item, index) => <ProductSkeleton key={index} />)}
                                     </div>
                             }
                         </div>
