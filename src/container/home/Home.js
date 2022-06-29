@@ -43,13 +43,25 @@ const Home = () => {
         <>
             <Slider />
             <div className='container'>
-                <ProductsSlider categoryName={'Ən çox satılan məhsullar'} data={sliderData('mobil-telefonlar')} />
-                <ProductsSlider categoryName={'Yeni gələn məhsullar'} data={sliderData('mobil-telefonlar')} />
+                <ProductsSlider
+                    categoryName={'Ən çox satılan məhsullar'}
+                    loading={products.loading}
+                    data={sliderData('mobil-telefonlar')}
+                />
+                <ProductsSlider
+                    categoryName={'Yeni gələn məhsullar'}
+                    loading={products.loading}
+                    data={sliderData('mobil-telefonlar')}
+                />
                 <div className='banner-wrapper'>
                     <Banner img={iphone_1} />
                     <Banner img={iphone_11} color={'#f2f2f2'} />
                 </div>
-                <ProductsSlider categoryName={'Yeni gələn aksesuarlar'} data={sliderData('aksesuarlar')} />
+                <ProductsSlider
+                    categoryName={'Yeni gələn aksesuarlar'}
+                    loading={products.loading}
+                    data={sliderData('aksesuarlar')}
+                />
                 <div className='category-card-wrapper'>
                     <CategoryCard image={image6xiaomi} />
                     <CategoryCard image={watch} />

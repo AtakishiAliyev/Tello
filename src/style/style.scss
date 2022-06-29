@@ -57,8 +57,32 @@ select {
   -webkit-padding-end: 35px;
 }
 
+.skeleton-wrapper {
+  display: flex;
+  gap: 20px;
+  svg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%),
+      0 4px 6px -4px rgb(0 0 0 / 10%);
+  }
+}
+
 @media (max-width: $mobile) {
   .container {
     width: 90%;
+  }
+
+  .skeleton-wrapper {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding: 20px 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    svg {
+      min-width: 250px;
+    }
   }
 }
