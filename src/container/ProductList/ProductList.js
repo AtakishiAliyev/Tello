@@ -5,14 +5,13 @@ import Product from '../../components/Product/Product'
 import ProductFilter from '../../components/ProductList/ProductFilter/ProductFilter'
 import { useParams, useSearchParams } from 'react-router-dom';
 import { getProductsAsync } from '../../redux/actions/products';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
 import * as api from '../../api/https'
 
 const ProductList = () => {
     const [filter, setFilter] = useState(false)
     const dispatch = useDispatch()
-    const { products } = useSelector((state) => state)
     const param = useParams()
     const [searchParams, setSearchParams] = useSearchParams({});
 
