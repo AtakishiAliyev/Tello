@@ -8,6 +8,7 @@ import { getProductsAsync } from '../../redux/actions/products';
 import { useDispatch } from 'react-redux'
 import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
 import * as api from '../../api/https'
+import Pagination from '../../components/Pagination/Pagination'
 
 const ProductList = () => {
     const [filter, setFilter] = useState(false)
@@ -26,12 +27,13 @@ const ProductList = () => {
     useEffect(() => {
         const params = searchParams.get('query')
         const sort = searchParams.get('sortBy')
+        const page = searchParams.get('page')
 
         if (params !== null || sort !== null) {
             async function getLastData() {
                 setLoading(true)
                 try {
-                    const result = await api.getFilteredProducts([params?.split(','), sort, param.slug]);
+                    const result = await api.getFilteredProducts([params?.split(','), sort, page, param.slug]);
                     setDatas(result.data)
                 } catch (error) {
                     if (!error.response) {
@@ -45,7 +47,7 @@ const ProductList = () => {
             async function getLastData() {
                 setLoading(true)
                 try {
-                    const result = await api.getFilteredProducts(['', '', param.slug]);
+                    const result = await api.getFilteredProducts(['', '', '', param.slug]);
                     setDatas(result.data)
                 } catch (error) {
                     if (!error.response) {
@@ -63,7 +65,11 @@ const ProductList = () => {
         setSearchParams(searchParams)
     }
 
-    console.log(datas)
+    useEffect(() => {
+        searchParams.set('page', 1)
+        setSearchParams(searchParams)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams.get('query'), searchParams.get('sortBy'), setSearchParams, searchParams])
 
     return (
         <>
@@ -81,7 +87,7 @@ const ProductList = () => {
                     </div>
                     <div className='product-list'>
                         <div className='product-sort'>
-                            {/* <div className= 'total-product'>{datas?.data ? datas?.data.length : '0'} məhsul tapıldı</div> */}
+                            <div className='total-product'>{!loading ? datas?.data ? datas?.data.length + ' məhsul tapıldı' : 'Məhsul tapılmadı' : 'Məhsul axtarılır...'}</div>
                             <div className='mobile-filter-sort'>
                                 <select defaultValue={searchParams.get("sortBy")} onChange={(e) => { handleSelect(e) }}>
                                     <option value="created_at">Ən yenilər</option>
@@ -108,6 +114,7 @@ const ProductList = () => {
                                     </div>
                             }
                         </div>
+                        <Pagination data={datas.meta} />
                     </div>
                 </div>
             </div>
@@ -116,19 +123,3 @@ const ProductList = () => {
 }
 
 export default ProductList
-
-// !products.loading
-//     ? filteredProd?.data && filteredProd?.data.length > 0
-//         ? filteredProd?.data.map(item => {
-//             return (
-//                 <Product key={item.id} product={item} />
-//             )
-//         })
-//         : products?.products.map(item => {
-//             return (
-//                 <Product key={item.id} product={item} />
-//             )
-//         })
-//     : <div className='skeleton-wrapper skeleton-products'>
-//         {[1, 2, 3].map((item, index) => <ProductSkeleton key={index} />)}
-//     </div>
