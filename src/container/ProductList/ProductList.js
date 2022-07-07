@@ -7,39 +7,64 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { getProductsAsync } from '../../redux/actions/products';
 import { useDispatch, useSelector } from 'react-redux'
 import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
-
 import * as api from '../../api/https'
 
 const ProductList = () => {
     const [filter, setFilter] = useState(false)
-    const [filteredType, setFilteredType] = useState([])
     const dispatch = useDispatch()
     const { products } = useSelector((state) => state)
     const param = useParams()
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams({});
 
     useEffect(() => {
         dispatch(getProductsAsync(param.slug))
     }, [dispatch, param])
 
     // ! Filter Logic 
-    const [filteredProd, setFilteredProd] = useState([])
+    const [datas, setDatas] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const params = searchParams.get('query')
+        const sort = searchParams.get('sortBy')
 
-        if (params !== null) {
+        if (params !== null || sort !== null) {
             async function getLastData() {
-                const result = await api.getFilteredProducts(params.split(','));
-                setFilteredProd(result.data)
+                setLoading(true)
+                try {
+                    const result = await api.getFilteredProducts([params?.split(','), sort, param.slug]);
+                    setDatas(result.data)
+                } catch (error) {
+                    if (!error.response) {
+                        throw error
+                    }
+                }
+                setLoading(false)
             }
             getLastData()
         } else {
-            setFilteredProd(products.products)
+            async function getLastData() {
+                setLoading(true)
+                try {
+                    const result = await api.getFilteredProducts(['', '', param.slug]);
+                    setDatas(result.data)
+                } catch (error) {
+                    if (!error.response) {
+                        throw error
+                    }
+                }
+                setLoading(false)
+            }
+            getLastData()
         }
-    }, [searchParams, products])
+    }, [searchParams, param.slug])
 
-    console.log(filteredProd)
+    const handleSelect = (e) => {
+        searchParams.set("sortBy", e.target.value)
+        setSearchParams(searchParams)
+    }
+
+    console.log(datas)
 
     return (
         <>
@@ -53,17 +78,16 @@ const ProductList = () => {
                             </div>
                             <h3>Filterləmələr</h3>
                         </div>
-                        <ProductFilter filteredType={filteredType} setFilteredType={setFilteredType} />
+                        <ProductFilter />
                     </div>
                     <div className='product-list'>
                         <div className='product-sort'>
-                            <div className='total-product'>{!products.loading ? products?.products.length : '0'} məhsul tapıldı</div>
+                            {/* <div className= 'total-product'>{datas?.data ? datas?.data.length : '0'} məhsul tapıldı</div> */}
                             <div className='mobile-filter-sort'>
-                                <select>
-                                    <option value="id_desc">Ən yenilər</option>
-                                    <option value="name_a_to_z">Ada görə</option>
-                                    <option value="price_low_to_hi">Əvvəlcə ucuz</option>
-                                    <option value="price_hi_to_low">Əvvəlcə baha</option>
+                                <select defaultValue={searchParams.get("sortBy")} onChange={(e) => { handleSelect(e) }}>
+                                    <option value="created_at">Ən yenilər</option>
+                                    <option value="name">Ada görə</option>
+                                    <option value="price">Qiymətə görə</option>
                                 </select>
                                 <div className='btn-filter-wrapper'>
                                     <button onClick={() => { setFilter(true) }} className='btn btn-filter'>Filterləmələr</button>
@@ -72,12 +96,14 @@ const ProductList = () => {
                         </div>
                         <div className='products-wrapper'>
                             {
-                                !products.loading
-                                    ? products?.products.map(item => {
-                                        return (
-                                            <Product key={item.id} product={item} />
-                                        )
-                                    })
+                                !loading
+                                    ? datas?.data
+                                        ? datas?.data?.map(item => {
+                                            return (
+                                                <Product key={item.id} product={item} />
+                                            )
+                                        })
+                                        : <h1>Məhsul tapılmadı</h1>
                                     : <div className='skeleton-wrapper skeleton-products'>
                                         {[1, 2, 3].map((item, index) => <ProductSkeleton key={index} />)}
                                     </div>
@@ -91,3 +117,19 @@ const ProductList = () => {
 }
 
 export default ProductList
+
+// !products.loading
+//     ? filteredProd?.data && filteredProd?.data.length > 0
+//         ? filteredProd?.data.map(item => {
+//             return (
+//                 <Product key={item.id} product={item} />
+//             )
+//         })
+//         : products?.products.map(item => {
+//             return (
+//                 <Product key={item.id} product={item} />
+//             )
+//         })
+//     : <div className='skeleton-wrapper skeleton-products'>
+//         {[1, 2, 3].map((item, index) => <ProductSkeleton key={index} />)}
+//     </div>

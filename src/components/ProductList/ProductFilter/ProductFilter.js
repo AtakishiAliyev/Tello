@@ -44,8 +44,6 @@ export default function ProductFilter() {
         if (query.length > 0) {
             searchParams.set("query", query)
             setSearchParams(searchParams)
-        } else if (query.length === 0) {
-            setSearchParams('')
         }
 
     }, [query, searchParams, setSearchParams, query.length])
@@ -61,6 +59,10 @@ export default function ProductFilter() {
             setQuery([...query, value])
         } else {
             setQuery(query.filter(e => e !== value))
+            if (query.length === 1) {
+                searchParams.delete("query")
+                setSearchParams(searchParams)
+            }
         }
     };
 
