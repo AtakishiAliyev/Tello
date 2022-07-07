@@ -3,20 +3,43 @@ import './ProductList.scss'
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
 import Product from '../../components/Product/Product'
 import ProductFilter from '../../components/ProductList/ProductFilter/ProductFilter'
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { getProductsAsync } from '../../redux/actions/products';
 import { useDispatch, useSelector } from 'react-redux'
 import ProductSkeleton from '../../components/Skeleton/ProductSkeleton'
 
+import * as api from '../../api/https'
+
 const ProductList = () => {
     const [filter, setFilter] = useState(false)
+    const [filteredType, setFilteredType] = useState([])
     const dispatch = useDispatch()
     const { products } = useSelector((state) => state)
     const param = useParams()
+    const [searchParams] = useSearchParams();
 
     useEffect(() => {
         dispatch(getProductsAsync(param.slug))
     }, [dispatch, param])
+
+    // ! Filter Logic 
+    const [filteredProd, setFilteredProd] = useState([])
+
+    useEffect(() => {
+        const params = searchParams.get('query')
+
+        if (params !== null) {
+            async function getLastData() {
+                const result = await api.getFilteredProducts(params.split(','));
+                setFilteredProd(result.data)
+            }
+            getLastData()
+        } else {
+            setFilteredProd(products.products)
+        }
+    }, [searchParams, products])
+
+    console.log(filteredProd)
 
     return (
         <>
@@ -30,7 +53,7 @@ const ProductList = () => {
                             </div>
                             <h3>Filterləmələr</h3>
                         </div>
-                        <ProductFilter />
+                        <ProductFilter filteredType={filteredType} setFilteredType={setFilteredType} />
                     </div>
                     <div className='product-list'>
                         <div className='product-sort'>
