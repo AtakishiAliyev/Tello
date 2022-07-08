@@ -3,7 +3,7 @@
 .product-list-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 140px;
+  // margin-bottom: 140px;
 
   .filter {
     width: 25%;
@@ -49,6 +49,39 @@
 
   .mobile-filter-head {
     display: none;
+  }
+
+  .pagination-wrapper {
+    margin: 70px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .MuiPagination-ul {
+    & > li + li {
+      margin-left: 10px;
+    }
+
+    li:first-child button,
+    li:last-child button {
+      border: 1px solid $clr-gray-5;
+    }
+
+    li button {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $clr-gray-2;
+      font-size: 14px;
+    }
+
+    li button.Mui-selected {
+      background-color: $clr-brand;
+      color: #fff;
+      border-radius: 8px !important;
+    }
   }
 }
 

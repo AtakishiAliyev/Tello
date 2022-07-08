@@ -24,12 +24,13 @@ const ProductList = () => {
     const [datas, setDatas] = useState([])
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const params = searchParams.get('query')
-        const sort = searchParams.get('sortBy')
-        const page = searchParams.get('page')
+    const params = searchParams.get('query')
+    const sort = searchParams.get('sortBy')
+    const page = searchParams.get('page')
 
-        if (params !== null || sort !== null) {
+
+    useEffect(() => {
+        if (params !== null || sort !== null || param.slug !== null) {
             async function getLastData() {
                 setLoading(true)
                 try {
@@ -43,22 +44,8 @@ const ProductList = () => {
                 setLoading(false)
             }
             getLastData()
-        } else {
-            async function getLastData() {
-                setLoading(true)
-                try {
-                    const result = await api.getFilteredProducts(['', '', page, param.slug]);
-                    setDatas(result.data)
-                } catch (error) {
-                    if (!error.response) {
-                        throw error
-                    }
-                }
-                setLoading(false)
-            }
-            getLastData()
         }
-    }, [searchParams, param.slug])
+    }, [searchParams, param.slug, params, sort, page])
 
     const handleSelect = (e) => {
         searchParams.set("sortBy", e.target.value)
@@ -108,7 +95,11 @@ const ProductList = () => {
                                     </div>
                             }
                         </div>
-                        <Pagination data={datas.meta} />
+                        {
+                            datas?.meta?.pagination?.total_pages > 1 && <div className='pagination-wrapper'>
+                                <Pagination data={datas.meta} />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

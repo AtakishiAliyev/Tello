@@ -10,9 +10,6 @@ export default function BasicPagination({ data }) {
     const page = searchParams.get('page');
     const sort = searchParams.get('sortBy');
 
-
-    console.log(sort)
-
     const handleChange = (event, value) => {
         setPageNum(value)
         searchParams.set("page", value)
@@ -25,7 +22,7 @@ export default function BasicPagination({ data }) {
             searchParams.set("page", 1)
             setSearchParams(searchParams)
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [query?.length, sort?.length])
 
     useEffect(() => {
@@ -34,12 +31,12 @@ export default function BasicPagination({ data }) {
             searchParams.set("page", page)
             setSearchParams(searchParams)
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <Stack spacing={2}>
-            <Pagination onChange={handleChange} count={data?.pagination.total_pages} page={+pageNum} />
+            <Pagination size="medium" siblingCount={0} boundaryCount={2} onChange={handleChange} count={data?.pagination.total_pages} page={+pageNum} />
         </Stack>
     );
 }

@@ -4,6 +4,7 @@ import ProductList from './container/ProductList/ProductList';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer'
 import { Route, Routes } from 'react-router-dom';
+import ProductDetails from './container/ProductDetails/ProductDetails';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/:slug" element={<ProductList />} />
+        <Route path="/product-details/:slug" element={<ProductDetails />} />
         <Route />
       </Routes>
       <Footer />
