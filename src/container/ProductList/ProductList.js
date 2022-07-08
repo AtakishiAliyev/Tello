@@ -47,7 +47,7 @@ const ProductList = () => {
             async function getLastData() {
                 setLoading(true)
                 try {
-                    const result = await api.getFilteredProducts(['', '', '', param.slug]);
+                    const result = await api.getFilteredProducts(['', '', page, param.slug]);
                     setDatas(result.data)
                 } catch (error) {
                     if (!error.response) {
@@ -64,12 +64,6 @@ const ProductList = () => {
         searchParams.set("sortBy", e.target.value)
         setSearchParams(searchParams)
     }
-
-    useEffect(() => {
-        searchParams.set('page', 1)
-        setSearchParams(searchParams)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchParams.get('query'), searchParams.get('sortBy'), setSearchParams, searchParams])
 
     return (
         <>

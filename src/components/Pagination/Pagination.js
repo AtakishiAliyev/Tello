@@ -6,20 +6,40 @@ import { useSearchParams } from 'react-router-dom';
 export default function BasicPagination({ data }) {
     const [searchParams, setSearchParams] = useSearchParams({});
     const [pageNum, setPageNum] = useState(searchParams.get('page') || 1)
+    const query = searchParams.get('query');
+    const page = searchParams.get('page');
+    const sort = searchParams.get('sortBy');
 
-    function pageChangeHandler(event, pageNumber = 1) {
-        setPageNum(pageNumber)
-        searchParams.set("page", pageNumber)
+
+    console.log(sort)
+
+    const handleChange = (event, value) => {
+        setPageNum(value)
+        searchParams.set("page", value)
         setSearchParams(searchParams)
     }
 
     useEffect(() => {
-        setPageNum(searchParams.get("page"))
-    }, [searchParams])
+        if (query || sort) {
+            setPageNum(1)
+            searchParams.set("page", 1)
+            setSearchParams(searchParams)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [query?.length, sort?.length])
+
+    useEffect(() => {
+        if (page !== null) {
+            setPageNum(page)
+            searchParams.set("page", page)
+            setSearchParams(searchParams)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Stack spacing={2}>
-            <Pagination onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)} count={data?.pagination.total_pages} page={+pageNum} />
+            <Pagination onChange={handleChange} count={data?.pagination.total_pages} page={+pageNum} />
         </Stack>
     );
 }
