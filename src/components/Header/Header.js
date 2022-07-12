@@ -5,6 +5,7 @@ import logo from '../../images/logo.png'
 import person_icon from '../../images/person.png'
 import heart_icon from '../../images/heart.png'
 import basket_icon from '../../images/shopping-cart.png'
+import loading from '../../images/mini_loading.svg'
 import Search from '../Search/Search'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
 import { getCategories } from '../../redux/actions/categories'
@@ -14,7 +15,7 @@ import { getCreateBasket, getUserBasketAsync } from '../../redux/actions/basket'
 
 const Header = () => {
     const dispatch = useDispatch()
-    const { categories } = useSelector((state) => state)
+    const { categories, basket } = useSelector((state) => state)
     const [hoverCategoryId, setHoverCategoryId] = useState()
     const [navbarStatus, setNavbarStatus] = useState(false)
     const [openId, setOpenId] = useState()
@@ -47,6 +48,8 @@ const Header = () => {
         }
     }
 
+    console.log(basket)
+
     return (
         <div className='header-wrapper'>
             <div className='container-fluid'>
@@ -70,8 +73,13 @@ const Header = () => {
                         <a href='/' className='user_block-item'>
                             <img src={heart_icon} alt="heart" />
                         </a>
-                        <Link to='/basket' className='user_block-item'>
+                        <Link to='/basket' className='user_block-item user_basket_icon'>
                             <img src={basket_icon} alt="basket" />
+                            {
+                                !basket.loading
+                                    ? <div className='basket_product_count'>{basket.basket.total_items}</div>
+                                    : <span className='basket_product_loading'><img src={loading} alt="loading" /></span>
+                            }
                         </Link>
                     </div>
                     <nav className={`${navbarStatus && 'open-navbar'}`}>

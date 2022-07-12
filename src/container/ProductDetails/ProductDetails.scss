@@ -1,5 +1,10 @@
 @import "../../style/sass-utils/variable.scss";
 
+.product-details-content {
+  position: relative;
+  padding-bottom: 100px;
+}
+
 .product-details-wrapper {
   display: flex;
   margin-bottom: 100px;
