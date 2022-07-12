@@ -48,8 +48,6 @@ const Header = () => {
         }
     }
 
-    console.log(basket)
-
     return (
         <div className='header-wrapper'>
             <div className='container-fluid'>
@@ -98,10 +96,10 @@ const Header = () => {
 
                         <ul className='navbar_block'>
                             {
-                                categories.categories[0]?.children.map(category => {
+                                categories?.categories[0]?.children.map(category => {
                                     return (
-                                        <li key={category.id} onMouseOver={() => { gethoverCategoryId(category) }}>
-                                            <div onClick={() => { navigate(`/products/${category.slug}`) }} >{category.name}</div>
+                                        <li key={category?.id} onMouseOver={() => { gethoverCategoryId(category) }}>
+                                            <div onClick={() => { navigate(`/products/${category?.slug}`) }} >{category?.name}</div>
 
                                             {
                                                 category.children.length > 0
