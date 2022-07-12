@@ -77,7 +77,7 @@ const Header = () => {
                             <img src={basket_icon} alt="basket" />
                             {
                                 !basket.loading
-                                    ? <div className='basket_product_count'>{basket.basket.total_items}</div>
+                                    ? <div className='basket_product_count'>{basket?.basket?.total_items}</div>
                                     : <span className='basket_product_loading'><img src={loading} alt="loading" /></span>
                             }
                         </Link>
