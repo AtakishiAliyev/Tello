@@ -3,8 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default function SimpleSlider({ assets, image }) {
-    console.log(assets);
+export default function SimpleSlider({ assets }) {
     const settings = {
         customPaging: function (i) {
             return (

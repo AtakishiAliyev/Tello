@@ -10,6 +10,7 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu'
 import { getCategories } from '../../redux/actions/categories'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
+import { getCreateBasket, getUserBasketAsync } from '../../redux/actions/basket';
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -21,6 +22,12 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(getCategories())
+    }, [dispatch])
+
+    useEffect(() => {
+        !localStorage.getItem('basketId') && dispatch(getCreateBasket())
+
+        dispatch(getUserBasketAsync(localStorage.getItem('basketId')))
     }, [dispatch])
 
     function gethoverCategoryId(data) {
@@ -63,9 +70,9 @@ const Header = () => {
                         <a href='/' className='user_block-item'>
                             <img src={heart_icon} alt="heart" />
                         </a>
-                        <a href='/' className='user_block-item'>
+                        <Link to='/basket' className='user_block-item'>
                             <img src={basket_icon} alt="basket" />
-                        </a>
+                        </Link>
                     </div>
                     <nav className={`${navbarStatus && 'open-navbar'}`}>
                         <div className='mobile-navbar-header'>
