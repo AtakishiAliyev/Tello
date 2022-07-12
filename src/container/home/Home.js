@@ -26,7 +26,7 @@ const Home = () => {
 
     const sliderData = (slug) => {
         const data = []
-        products.products.map(item => {
+        products?.products?.map(item => {
             item.categories.map(el => {
                 if (el.slug === slug) {
                     data.push(item)
