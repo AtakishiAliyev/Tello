@@ -37,10 +37,12 @@
       .item-details {
         display: flex;
         align-items: center;
+        width: 60%;
       }
 
       .image {
         width: 50px;
+        min-width: 50px;
         height: 75px;
         margin-right: 32px;
 
@@ -85,6 +87,7 @@
       .item-quantity {
         display: flex;
         align-items: center;
+        width: 20%;
 
         button {
           background-color: transparent;
@@ -196,6 +199,7 @@
 
       .item-details {
         flex-direction: column;
+        width: 100% !important;
 
         .image {
           margin: 0;
@@ -213,6 +217,11 @@
         }
       }
     }
+
+    .item-quantity {
+      width: 100% !important;
+      justify-content: center;
+    }
   }
 
   .remove-btn {
@@ -220,4 +229,17 @@
     top: 15px;
     right: 15px;
   }
+}
+
+.checkout_btn {
+  background-color: $clr-brand;
+  border-radius: 8px;
+  padding: 16px 50px;
+  font-size: $fs-medium;
+  font-weight: $fw-500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
 }

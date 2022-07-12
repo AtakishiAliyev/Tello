@@ -1,4 +1,4 @@
-// @import url("http://fonts.cdnfonts.com/css/euclid-circular-a?styles=100037,100034,100036,100039,100031");
+@import url("http://fonts.cdnfonts.com/css/euclid-circular-a?styles=100037,100034,100036,100039,100031");
 @import "./sass-utils/reset.scss";
 @import "./sass-utils/variable.scss";
 
@@ -27,6 +27,10 @@ a {
 
 .active-link {
   color: $clr-succes !important;
+}
+
+.d-none-desktop {
+  display: none;
 }
 
 .d-flex {
@@ -88,9 +92,17 @@ select {
   justify-content: center;
 }
 
+.Toastify__progress-bar {
+  background: $clr-brand !important;
+}
+
 @media (max-width: $mobile) {
   .container {
     width: 90%;
+  }
+
+  .d-none-desktop {
+    display: flex;
   }
 
   .skeleton-wrapper {

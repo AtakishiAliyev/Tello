@@ -6,6 +6,7 @@ const getFilteredProducts = ([params, sort, page, slug]) => instance.get(`/produ
 const getProductDetails = (id) => instance.get(`/products/${id}`)
 const createBasket = () => instance.get('/carts')
 const getUserBasket = (id) => instance.get(`/carts/${id}`)
+const getSearchProducts = (query) => instance.get(`/products?query=${query !== null && query}`)
 
 export {
     getAllCategories,
@@ -14,4 +15,5 @@ export {
     getProductDetails,
     createBasket,
     getUserBasket,
+    getSearchProducts
 }

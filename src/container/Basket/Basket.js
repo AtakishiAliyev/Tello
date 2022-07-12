@@ -61,6 +61,7 @@ const Basket = () => {
                                                     <button onClick={() => { updatedQuantity('inc', item.quantity, item.id) }}>+</button>
                                                 </div>
                                                 <button onClick={() => {
+
                                                     dispatch(deleteBasketItem({
                                                         basket_id: localStorage.getItem('basketId'),
                                                         line_item_id: item.id
@@ -77,6 +78,7 @@ const Basket = () => {
                                         )
                                     })
                                 }
+                                <Link to='/' className='checkout_btn d-none-desktop'>Checkout</Link>
                             </div>
                             <div className='basket-total'>
                                 <h3>Ümumi</h3>
@@ -102,6 +104,7 @@ const Basket = () => {
                                     <span>Cəmi</span>
                                     <span>{basket?.basket?.subtotal.raw} AZN</span>
                                 </p>
+                                <Link to='/' className='checkout_btn'>Checkout</Link>
                             </div>
                         </div>
                         : <div className='empty-basket'>
