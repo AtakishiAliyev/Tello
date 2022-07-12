@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import * as api from '../../api/https'
-const { REACT_APP_API_KEY } = 'pk_437901876da421fb3e83a2493acac7205e61388d27e32'
+const { REACT_APP_API_KEY } = process.env
 
 export const getCreateBasket = createAsyncThunk('basket/fetchBasket', async () => {
     try {
