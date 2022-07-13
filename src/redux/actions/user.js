@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 const { REACT_APP_API_KEY } = process.env
 
+console.log(REACT_APP_API_KEY);
+
 export const createCustomer = createAsyncThunk('user/fetchUser', async (data) => {
     const body = {
         "firstname": data.firstname,
