@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCustomer } from "../actions/user";
+import { createCustomer, loginCustomer } from "../actions/user";
 
 const initialState = {
     loading: false,
@@ -19,6 +19,17 @@ const userReducer = createSlice({
             state.error = payload
         },
         [createCustomer.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.user = payload
+        },
+        [loginCustomer.pending]: (state) => {
+            state.loading = true
+        },
+        [loginCustomer.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.error = payload
+        },
+        [loginCustomer.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.user = payload
         }

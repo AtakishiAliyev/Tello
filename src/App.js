@@ -8,6 +8,7 @@ import ProductDetails from './container/ProductDetails/ProductDetails';
 import Basket from './container/Basket/Basket';
 import SignUp from './container/SignUp/SignUp';
 import Login from './container/Login/Login';
+import UserProfile from './container/UserProfile/UserProfile';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/basket" element={<Basket />} />
         <Route path="/products/:slug" element={<ProductList />} />
         <Route path="/product-details/:slug" element={<ProductDetails />} />
+        <Route path="/userprofile/:token" element={<UserProfile />} />
         <Route />
       </Routes>
       <Footer />

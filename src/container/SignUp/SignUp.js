@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Signup.scss'
 import { createCustomer } from '../../redux/actions/user'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SignUp = () => {
     const dispatch = useDispatch();
+
+    const { user } = useSelector((state) => state)
+
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -16,6 +19,31 @@ const SignUp = () => {
 
         dispatch(createCustomer(formValues))
     }
+
+    useEffect(() => {
+        async function users() {
+            const url = new URL(
+                "https://api.chec.io/v1/customers"
+            );
+
+            let headers = {
+                "X-Authorization": "sk_43790e4ac2a0fa20c262e5f327a452b6084617465172f",
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            };
+
+            fetch(url, {
+                method: "GET",
+                headers: headers,
+            })
+                .then(response => response.json())
+                .then(json => console.log(json));
+        }
+        users()
+
+    }, [])
+
+    console.log(user)
 
     return (
         <div className='signup-wrapper'>
