@@ -13,6 +13,7 @@ const Search = () => {
     const navigate = useNavigate()
     const search = useRef()
     const [value] = useDebounce(inputText, 1000);
+    const [lastSearch, setLastSearch] = useState(JSON.parse(localStorage.getItem('search')) || [])
 
     window.addEventListener('click', (e) => {
         if (!search.current?.contains(e.target)) {
@@ -26,6 +27,9 @@ const Search = () => {
             try {
                 if (value.length > 0) {
                     const result = await getSearchProducts(value)
+                    const newArr = [...new Set([...lastSearch, value])]
+                    setLastSearch(newArr)
+                    localStorage.setItem('search', JSON.stringify(newArr))
                     return setProducts(result.data.data)
                 }
             } catch (error) {
@@ -36,6 +40,7 @@ const Search = () => {
         }
 
         getSearch()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value])
 
     return (
@@ -82,9 +87,9 @@ const Search = () => {
 
                             </div>
                             : <div className='last_search'>
-                                <div className='item'>Iphone</div>
-                                <div className='item'>Samsung</div>
-                                <div className='item'>Honor</div>
+                                {
+                                    JSON.parse(localStorage.getItem('search'))?.reverse(    ).slice(0, 5).map((item, index) => <div onClick={() => { setInputText(item) }} key={index} className='item'>{item}</div>)
+                                }
                             </div>
                     }
                 </div>

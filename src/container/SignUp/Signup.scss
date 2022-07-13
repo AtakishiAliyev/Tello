@@ -1,0 +1,20 @@
+@import "../../style/sass-utils/variable.scss";
+
+.signup-wrapper {
+  padding: 100px 0;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & > input + input {
+        margin-top: 16px;
+    }
+
+    button {
+        margin-top: 16px;
+    }
+  }
+}
