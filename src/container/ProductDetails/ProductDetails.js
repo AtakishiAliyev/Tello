@@ -59,6 +59,8 @@ const ProductDetails = () => {
         }))
     }
 
+    console.log(productData)
+
     return (
         <>
             <div className='product-details-content'>

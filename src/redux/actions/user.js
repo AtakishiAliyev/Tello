@@ -22,8 +22,7 @@ export const createCustomer = createAsyncThunk('user/fetchUser', async (data) =>
         })
 
         const response = await result.json();
-        console.log(response)
-        // return response
+        return response
 
     } catch (error) {
         if (!error.response) {
@@ -50,7 +49,7 @@ export const loginCustomer = createAsyncThunk('user/fetchLoginUser', async (data
         })
 
         const response = await result.json();
-        console.log(response);
+        return response
 
     } catch (error) {
         if (!error.response) {

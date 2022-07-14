@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import './Header.scss'
 import logo from '../../images/logo.png'
 import person_icon from '../../images/person.png'
-import heart_icon from '../../images/heart.png'
 import basket_icon from '../../images/shopping-cart.png'
 import loading from '../../images/mini_loading.svg'
 import Search from '../Search/Search'
@@ -65,12 +64,9 @@ const Header = () => {
                     </div>
                     <Search />
                     <div className='user_block'>
-                        <a href='/' className='user_block-item'>
+                        <Link to='/signup' className='user_block-item'>
                             <img src={person_icon} alt="person" />
-                        </a>
-                        <a href='/' className='user_block-item'>
-                            <img src={heart_icon} alt="heart" />
-                        </a>
+                        </Link>
                         <Link to='/basket' className='user_block-item user_basket_icon'>
                             <img src={basket_icon} alt="basket" />
                             {

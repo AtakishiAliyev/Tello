@@ -48,7 +48,6 @@ const UserProfile = () => {
                 "Accept": "application/json",
             };
 
-
             fetch(url, {
                 method: "GET",
                 headers: headers,

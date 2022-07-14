@@ -3,18 +3,116 @@
 .signup-wrapper {
   padding: 100px 0;
 
-  form {
+  .signup-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-    & > input + input {
-        margin-top: 16px;
+    .form-wrapper {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      h3 {
+        font-size: 2rem;
+        line-height: 2.8rem;
+        font-weight: $fw-500;
+        color: $clr-gray-2;
+      }
+
+      .social-media {
+        display: flex;
+        align-items: center;
+        margin: 32px 0 0;
+
+        & > .item + .item {
+          margin-left: 50px;
+        }
+
+        .item:first-child .image {
+          background-color: #4267b2;
+        }
+
+        .item:last-child .image {
+          background-color: #db4437;
+        }
+
+        .item {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+
+          .image {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          span {
+            font-size: $fs-medium;
+            color: $clr-gray-2;
+            line-height: 1.6rem;
+            margin-left: 8px;
+          }
+        }
+      }
+
+      p {
+        font-size: $fs-medium;
+        color: $clr-gray-4;
+        font-weight: $fw-500;
+        margin: 24px 0;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        & > .input-group + .input-group {
+          margin-top: 24px;
+        }
+
+        .login_btn {
+          max-width: 300px;
+          margin-top: 50px;
+        }
+      }
     }
 
-    button {
-        margin-top: 16px;
+    .image-wrapper {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin-top: 25px;
+        font-size: $fs-medium;
+        color: $clr-gray-2;
+        line-height: 2rem;
+
+        a {
+          font-weight: $fw-500;
+          color: #2d9cdb;
+        }
+      }
     }
+  }
+}
+
+@media (max-width: $mobile) {
+  .image-wrapper {
+    display: none !important;
+  }
+
+  .form-wrapper {
+    width: 100% !important;
   }
 }

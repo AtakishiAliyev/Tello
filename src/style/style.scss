@@ -96,6 +96,48 @@ select {
   background: $clr-brand !important;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+
+  label {
+    font-size: $fs-medium;
+    line-height: 2rem;
+    color: $clr-gray-2;
+    margin-bottom: 8px;
+  }
+
+  input {
+    max-width: 100%;
+    border: none;
+    background-color: $clr-gray-6;
+    color: $clr-gray-3;
+    font-size: $fs-medium;
+    line-height: 2rem;
+    padding: 14px 16px;
+    border-radius: 8px;
+    outline: none;
+
+    &::placeholder {
+      color: $clr-gray-3;
+    }
+  }
+}
+
+.main-btn {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background-color: $clr-brand;
+  font-size: $fs-medium;
+  font-weight: $fw-500;
+  padding: 14px 50px;
+  cursor: pointer;
+}
+
 @media (max-width: $mobile) {
   .container {
     width: 90%;
