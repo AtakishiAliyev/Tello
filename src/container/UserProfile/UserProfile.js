@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import './UserProfile.scss'
 
 const UserProfile = () => {
     const param = useParams()
@@ -28,7 +29,6 @@ const UserProfile = () => {
         })
             .then(response => response.json())
             .then(json => {
-                console.log(json?.customer_id)
                 if (json?.customer_id) { setCustomerId(json.customer_id) }
                 if (!localStorage.getItem('customer_id')) {
                     localStorage.setItem('customer_id', json?.customer_id)
@@ -57,15 +57,48 @@ const UserProfile = () => {
         }
     }, [customerId, param.token])
 
-    function logout() {
-        setCustomerId(null)
-        localStorage.setItem('customer_id', null)
-    }
+
+    console.log(userData)
 
     return (
-        <div>
-            <h3>{userData?.firstname}</h3>
-            <button onClick={() => { logout() }}>Log out</button>
+        <div className='user_details_body'>
+            <div className='container'>
+                <div className='user_details_wrapper'>
+                    <div className='user_profile'>
+                        <h3>Profilim</h3>
+                        <ul>
+                            <li>
+                                <Link to={`/userprofile/${param.token}`}>Şəxsi məlumatlar</Link>
+                            </li>
+                            <li>
+                                <Link to='/login'>Çıxış</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className='user_details'>
+                        <h3>Şəxsi məlumatlar</h3>
+                        <form>
+                            <div className='input-group'>
+                                <label>Ad </label>
+                                <input type="text" placeholder='Adınızı daxil edin' name='firstname' defaultValue={userData?.firstname} />
+                            </div>
+                            <div className='input-group'>
+                                <label>Soyad</label>
+                                <input type="text" placeholder='Soyadınızı daxil edin' name='lastname' defaultValue={userData?.lastname} />
+                            </div>
+                            <div className='input-group'>
+                                <label>E-mail</label>
+                                <input type="email" placeholder='nümunə@gmail.com' name='email' defaultValue={userData?.email} />
+                            </div>
+                            <div className='input-group'>
+                                <label>Mobil nömrə</label>
+                                <input type="text" placeholder='070 - 000 - 00 - 00' name='phone' defaultValue={userData?.phone} />
+                            </div>
+                            <button className='main-btn'>Məlumatları yenilə</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

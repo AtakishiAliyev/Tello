@@ -1,46 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './Signup.scss'
 import { createCustomer } from '../../redux/actions/user'
 import { useDispatch } from 'react-redux'
 import login from '../../images/login.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useForm } from "react-hook-form";
+import InputMask from "react-input-mask";
 
 const SignUp = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
-    const submitForm = (e) => {
-        e.preventDefault()
-        const formValues = {}
-
-        for (let i = 0; i < 4; i++) {
-            formValues[e.target[i].name] = e.target[i].value
-        }
-
-        dispatch(createCustomer(formValues))
-    }
-
-    useEffect(() => {
-        async function users() {
-            const url = new URL(
-                "https://api.chec.io/v1/customers"
-            );
-
-            let headers = {
-                "X-Authorization": "sk_43790e4ac2a0fa20c262e5f327a452b6084617465172f",
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            };
-
-            fetch(url, {
-                method: "GET",
-                headers: headers,
-            })
-                .then(response => response.json())
-                .then(json => console.log(json));
-        }
-        users()
-
-    }, [])
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors }
+    } = useForm()
 
     return (
         <div className='signup-wrapper'>
@@ -67,22 +43,66 @@ const SignUp = () => {
                             </div>
                         </div>
                         <p>və ya</p>
-                        <form onSubmit={(e) => { submitForm(e) }}>
+                        <form onSubmit={handleSubmit((data) => {
+                            dispatch(createCustomer(data))
+                            reset()
+                            navigate('/login')
+                        })}>
                             <div className='input-group'>
-                                <label>Ad </label>
-                                <input type="text" placeholder='Adınızı daxil edin' name='firstname' />
+                                <label>Ad</label>
+                                <input
+                                    {...register("firstname", { required: "Adınız qeyd edin" })}
+                                    type="text"
+                                    placeholder='Adınızı daxil edin'
+                                />
+                                {errors.firstname && <span className='alert-message'>{errors.firstname.message}</span>}
                             </div>
                             <div className='input-group'>
                                 <label>Soyad</label>
-                                <input type="text" placeholder='Soyadınızı daxil edin' name='lastname' />
+                                <input
+                                    {...register("lastname", { required: "Soyadınızı qeyd edin" })}
+                                    type="text"
+                                    placeholder='Soyadınızı daxil edin'
+                                />
+                                {errors.lastname && <span className='alert-message'>{errors.lastname.message}</span>}
                             </div>
                             <div className='input-group'>
                                 <label>E-mail</label>
-                                <input type="email" placeholder='nümunə@gmail.com' name='email' />
+                                <input
+                                    {...register("email", {
+                                        required: "Emailinizi qeyd edin",
+                                        pattern: {
+                                            value: /\S+@\S+\.\S+/,
+                                            message: "Email düzgün qeyd olunmayıb"
+                                        }
+                                    })}
+                                    type="email"
+                                    placeholder='nümunə@gmail.com'
+                                />
+                                {errors.email && <span className='alert-message'>{errors.email.message}</span>}
                             </div>
                             <div className='input-group'>
                                 <label>Mobil nömrə</label>
-                                <input type="text" placeholder='070 - 000 - 00 - 00' name='phone' />
+                                <InputMask
+                                    mask="999 999 99 99"
+                                    maskChar={null}
+                                    placeholder="050 000 00 00"
+                                    {...register("phone", {
+                                        required: "Nömrənizi qeyd edin", minLength: {
+                                            value: 13,
+                                            message: "Nömrə düzgün qeyd olunmayıb"
+                                        }
+                                    })}
+                                ></InputMask>
+                                {errors.phone && <span className='alert-message'>{errors.phone.message}</span>}
+                            </div>
+                            <div className='input-group checkbox-label'>
+                                <input
+                                    {...register("terms", { required: "Əgər istifadəçi şərtləri ilə razısınızsa bu xana mütləq doldurulmalıdır." })}
+                                    type="checkbox"
+                                />
+                                <span> İstifadəçi şərtləri ilə razıyam</span>
+                                {errors.terms && <span className='alert-message'>{errors.terms.message}</span>}
                             </div>
                             <button className='main-btn login_btn'>Qeydiyyat</button>
                         </form>

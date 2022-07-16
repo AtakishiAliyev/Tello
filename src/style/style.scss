@@ -4,6 +4,7 @@
 
 html {
   font-size: 10px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -45,6 +46,7 @@ input[type="checkbox"] {
   accent-color: #479e6a;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 select {
@@ -126,6 +128,23 @@ select {
   }
 }
 
+.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  font-size: $fs-medium;
+  line-height: 1.6rem;
+  color: $clr-gray-2;
+  flex-wrap: wrap;
+
+  span {
+    margin-left: 8px;
+  }
+
+  span.alert-message {
+    flex: 1;
+  }
+}
+
 .main-btn {
   width: 100%;
   border: none;
@@ -136,6 +155,13 @@ select {
   font-weight: $fw-500;
   padding: 14px 50px;
   cursor: pointer;
+}
+
+.alert-message {
+  color: $clr-danger;
+  font-size: $fs-medium;
+  font-weight: $fw-500;
+  margin-top: 12px;
 }
 
 @media (max-width: $mobile) {
