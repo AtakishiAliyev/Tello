@@ -60,3 +60,21 @@ const handleTypeChange = ({ target: { checked, value, dataset } }) => {
             : setFilteredType(({ color, size }) => ({ size: size.filter(e => e !== value), color: [...color] }))
     }
 };
+
+
+const url = new URL(
+    "https://api.chec.io/v1/customers?limit=100"
+);
+
+let headers = {
+    "X-Authorization": REACT_APP_API_KEY,
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));

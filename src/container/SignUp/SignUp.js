@@ -1,14 +1,12 @@
 import React from 'react'
 import './Signup.scss'
-import { createCustomer } from '../../redux/actions/user'
-import { useDispatch } from 'react-redux'
 import login from '../../images/login.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
+const { REACT_APP_API_KEY } = process.env
 
 const SignUp = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate()
 
     const {
@@ -17,6 +15,36 @@ const SignUp = () => {
         reset,
         formState: { errors }
     } = useForm()
+
+    async function createCustomer(datas) {
+        const body = {
+            "firstname": datas?.firstname,
+            "lastname": datas?.lastname,
+            "email": datas?.email,
+            "phone": datas?.phone,
+            "external_id": null
+        }
+
+        try {
+            const result = await fetch(`https://api.chec.io/v1/customers`, {
+                method: "POST",
+                headers: {
+                    "X-Authorization": REACT_APP_API_KEY,
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body)
+            })
+
+            const response = await result.json();
+            return response
+
+        } catch (error) {
+            if (!error.response) {
+                throw error
+            }
+        }
+    }
 
     return (
         <div className='signup-wrapper'>
@@ -44,7 +72,7 @@ const SignUp = () => {
                         </div>
                         <p>və ya</p>
                         <form onSubmit={handleSubmit((data) => {
-                            dispatch(createCustomer(data))
+                            createCustomer(data)
                             reset()
                             navigate('/login')
                         })}>

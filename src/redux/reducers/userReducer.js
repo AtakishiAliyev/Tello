@@ -1,39 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createCustomer, loginCustomer } from "../actions/user";
+// import { createSlice } from "@reduxjs/toolkit";
+// import { getCustemerData } from "../actions/user";
 
-const initialState = {
-    loading: false,
-    error: null,
-    user: [],
-};
+// const initialState = {
+//     loading: false,
+//     error: null,
+//     user: [],
+// };
 
-const userReducer = createSlice({
-    name: 'user',
-    initialState,
-    extraReducers: {
-        [createCustomer.pending]: (state) => {
-            state.loading = true
-        },
-        [createCustomer.rejected]: (state, { payload }) => {
-            state.loading = false
-            state.error = payload
-        },
-        [createCustomer.fulfilled]: (state, { payload }) => {
-            state.loading = false
-            state.user = payload
-        },
-        [loginCustomer.pending]: (state) => {
-            state.loading = true
-        },
-        [loginCustomer.rejected]: (state, { payload }) => {
-            state.loading = false
-            state.error = payload
-        },
-        [loginCustomer.fulfilled]: (state, { payload }) => {
-            state.loading = false
-            state.user = payload
-        }
-    }
-})
+// const userReducer = createSlice({
+//     name: 'user',
+//     initialState,
+//     extraReducers: {
+//         [getCustemerData.pending]: (state) => {
+//             state.loading = true
+//         },
+//         [getCustemerData.rejected]: (state, { payload }) => {
+//             state.loading = false
+//             state.error = payload
+//         },
+//         [getCustemerData.fulfilled]: (state, { payload }) => {
+//             state.loading = false
+//             state.user = payload
+//         }
+//     }
+// })
 
-export default userReducer.reducer
+// export default userReducer.reducer
