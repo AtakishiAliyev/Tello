@@ -66,6 +66,10 @@
           align-items: center;
           justify-content: space-between;
 
+          .color:nth-child(2) {
+            margin-left: 12px;
+          }
+
           .color {
             font-size: $fs-small;
             line-height: 1.6rem;

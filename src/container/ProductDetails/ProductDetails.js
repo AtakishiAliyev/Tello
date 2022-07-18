@@ -18,6 +18,7 @@ const ProductDetails = () => {
     const [activeSize, setActiveSize] = useState(null)
     const [gallery, setGallery] = useState([])
     const [quantity, setQuantity] = useState(1)
+    const breadcrumbData = productData?.categories[0]?.slug
 
     useEffect(() => {
         async function productDetails() {
@@ -59,8 +60,6 @@ const ProductDetails = () => {
         }))
     }
 
-    console.log(productData)
-
     return (
         <>
             <div className='product-details-content'>
@@ -70,7 +69,7 @@ const ProductDetails = () => {
                     </div>
                 }
                 <div className='container'>
-                    <Breadcrumb />
+                    <Breadcrumb breadcrumbData={breadcrumbData} />
                     <div className='product-details-wrapper'>
                         <div className='product-images'>
                             <Gallery assets={gallery} />

@@ -2,7 +2,7 @@
 
 .partners-slider-wrapper {
   background: #f5f5f7;
-  padding: 50px 0 25px;
+  padding: 50px 0 100px;
 
   .item {
     background-color: #fff;
@@ -14,12 +14,15 @@
     }
   }
 
-  .slick-list {
-    margin: 0 -10px;
+  .slick-slide {
+    & > div {
+      margin: 0 10px;
+    }
   }
 
-  .slick-slide {
-    margin: 0 10px;
+  .slick-dots {
+    bottom: 0 !important;
+    top: 105%;
   }
 }
 

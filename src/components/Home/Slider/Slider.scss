@@ -53,6 +53,7 @@
 
 @media (max-width: $mobile) {
   .slider-item {
+    height: 100vh !important;
     display: flex !important;
     flex-direction: column;
     justify-content: space-evenly;

@@ -23,7 +23,6 @@ const ProductList = () => {
     // ! Filter Logic 
     const [datas, setDatas] = useState([])
     const [loading, setLoading] = useState(true)
-
     const params = searchParams.get('query')
     const sort = searchParams.get('sortBy')
     const page = searchParams.get('page')
@@ -55,7 +54,7 @@ const ProductList = () => {
     return (
         <>
             <div className='container'>
-                <Breadcrumb />
+                <Breadcrumb breadcrumbData={param.slug} />
                 <div className='product-list-wrapper'>
                     <div className={`${filter ? 'open-filter' : ''} filter`}>
                         <div className='mobile-filter-head'>
@@ -68,9 +67,9 @@ const ProductList = () => {
                     </div>
                     <div className='product-list'>
                         <div className='product-sort'>
-                            <div className='total-product'>{!loading ? datas?.data ? datas?.data.length + ' məhsul tapıldı' : 'Məhsul tapılmadı' : 'Məhsul axtarılır...'}</div>
+                            <div className='total-product'>{!loading ? datas?.data ? datas?.data.length + ' məhsul tapıldı' : '0 Məhsul tapıldı' : 'Məhsul axtarılır...'}</div>
                             <div className='mobile-filter-sort'>
-                                <select defaultValue={searchParams.get("sortBy")} onChange={(e) => { handleSelect(e) }}>
+                                <select className={`${!loading && datas?.data ? '' : 'select-disabled'}`} defaultValue={searchParams.get("sortBy")} onChange={(e) => { handleSelect(e) }}>
                                     <option value="created_at">Ən yenilər</option>
                                     <option value="name">Ada görə</option>
                                     <option value="price">Qiymətə görə</option>

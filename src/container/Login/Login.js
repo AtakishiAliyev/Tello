@@ -13,7 +13,7 @@ const Login = () => {
         formState: { errors, isSubmitSuccessful }
     } = useForm()
 
-    async function customerLogin(datas) {
+    async function loginCustomer(datas) {
         const body = {
             "email": datas?.email,
             "base_url": datas?.base_url
@@ -83,7 +83,7 @@ const Login = () => {
                                 </div>
                                 <p>və ya</p>
                                 <form onSubmit={handleSubmit((data) => {
-                                    customerLogin({
+                                    loginCustomer({
                                         email: data.email,
                                         base_url: 'http://localhost:3000/userprofile/'
                                     })

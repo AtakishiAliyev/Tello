@@ -25,7 +25,7 @@ const Search = () => {
         const getSearch = async () => {
             setProducts([])
             try {
-                if (value.length > 0) {
+                if (value.trim().length > 0) {
                     const result = await getSearchProducts(value)
                     const newArr = [...new Set([...lastSearch, value])]
                     setLastSearch(newArr)
@@ -42,6 +42,15 @@ const Search = () => {
         getSearch()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value])
+
+    const clearSearch = () => {
+        if (value.length > 0) {
+            setInputText('')
+        } else {
+            setLastSearch([])
+            localStorage.removeItem('search')
+        }
+    }
 
     return (
         <div ref={search} className='search_block'>
@@ -61,34 +70,36 @@ const Search = () => {
                 <div className='searc_block-default'>
                     <div className='head'>
                         <h3>{value.trim().length > 0 ? 'Nəticələr' : 'Son axtarışlar'}</h3>
-                        <button onClick={() => { setInputText('') }}>Təmizlə</button>
+                        <button onClick={() => { clearSearch() }}>Təmizlə</button>
                     </div>
 
                     {
                         value.trim().length > 0
                             ? <div className='result_search'>
                                 {
-                                    products?.length > 0
-                                        ? products?.map(product => {
-                                            return (
-                                                <div onClick={() => { navigate(`/product-details/${product.id}`); setInputFocus(false); setInputText('') }} key={product?.id} className='item'>
-                                                    <div className='image'>
-                                                        <img src={product?.image?.url} alt="product" />
+                                    products !== undefined
+                                        ? products.length > 0
+                                            ? products?.map(product => {
+                                                return (
+                                                    <div onClick={() => { navigate(`/product-details/${product.id}`); setInputFocus(false); setInputText('') }} key={product?.id} className='item'>
+                                                        <div className='image'>
+                                                            <img src={product?.image?.url} alt="product" />
+                                                        </div>
+                                                        <div className='details'>
+                                                            <h3>{product?.name}</h3>
+                                                            <p className='price'>{product?.price.raw}</p>
+                                                        </div>
                                                     </div>
-                                                    <div className='details'>
-                                                        <h3>{product?.name}</h3>
-                                                        <p className='price'>{product?.price.raw}</p>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                        : [1, 2, 3].map((item, index) => <SearchSkeleton key={index} />)
+                                                )
+                                            })
+                                            : [1, 2, 3].map((item, index) => <SearchSkeleton key={index} />)
+                                        : <h3>Məhsul tapılmadı</h3>
                                 }
 
                             </div>
                             : <div className='last_search'>
                                 {
-                                    JSON.parse(localStorage.getItem('search'))?.reverse(    ).slice(0, 5).map((item, index) => <div onClick={() => { setInputText(item) }} key={index} className='item'>{item}</div>)
+                                    JSON.parse(localStorage.getItem('search'))?.reverse().slice(0, 5).map((item, index) => <div onClick={() => { setInputText(item) }} key={index} className='item'>{item}</div>)
                                 }
                             </div>
                     }

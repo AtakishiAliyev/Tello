@@ -1,62 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './UserProfile.scss'
-const { REACT_APP_API_KEY } = process.env
+import { getCustomerData, updateCustomer } from '../../redux/actions/user'
+import { useDispatch, useSelector } from 'react-redux'
+import { useForm } from "react-hook-form";
+import InputMask from "react-input-mask";
+import loading from '../../images/mini_loading.svg'
 
 const UserProfile = () => {
-    const param = useParams().token;
-    const [customerData, setCustomerData] = useState(null)
+    const dispatch = useDispatch()
+    const { user } = useSelector((state) => state)
+    const id = localStorage.getItem('customerID')
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isDirty }
+    } = useForm()
 
     useEffect(() => {
-        if (!localStorage.getItem('customerID')) {
-            const url = new URL(
-                "https://api.chec.io/v1/customers/exchange-token"
-            );
-
-            let headers = {
-                "X-Authorization": REACT_APP_API_KEY,
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            };
-
-            let body = {
-                "token": param
-            }
-
-            fetch(url, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(body)
-            })
-                .then(response => response.json())
-                .then(json => !localStorage.getItem('customerID') && localStorage.setItem('customerID', json.customer_id));
+        if (id !== null) {
+            dispatch(getCustomerData())
         }
-    }, [param])
+    }, [id, dispatch])
 
-    useEffect(() => {
-        const url = new URL(
-            `https://api.chec.io/v1/customers/${localStorage.getItem('customerID')}`
-        );
-
-        let headers = {
-            "X-Authorization": REACT_APP_API_KEY,
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        };
-
-        fetch(url, {
-            method: "GET",
-            headers: headers,
-        })
-            .then(response => response.json())
-            .then(json => setCustomerData(json));
-    }, [])
-
-    const logoutCustomer = () => {
+    function logoutCustomer() {
         localStorage.removeItem('customerID')
     }
 
-    console.log(customerData)
+    useEffect(() => {
+        reset(user?.user);
+    }, [reset, user]);
 
     return (
         <div className='user_details_body'>
@@ -66,34 +41,57 @@ const UserProfile = () => {
                         <h3>Profilim</h3>
                         <ul>
                             <li>
-                                <Link to={`/userprofile/${param.token}`}>Şəxsi məlumatlar</Link>
+                                <Link to='/userprofile'>Şəxsi məlumatlar</Link>
                             </li>
                             <li>
-                                <Link to='/login' onClick={() => { logoutCustomer() }}>Çıxış</Link>
+                                <Link to='/login' onClick={() => { logoutCustomer() }} >Çıxış</Link>
                             </li>
                         </ul>
                     </div>
                     <div className='user_details'>
                         <h3>Şəxsi məlumatlar</h3>
-                        <form>
-                            <div className='input-group'>
-                                <label>Ad </label>
-                                <input type="text" placeholder='Adınızı daxil edin' name='firstname' defaultValue={customerData?.firstname} />
-                            </div>
-                            <div className='input-group'>
-                                <label>Soyad</label>
-                                <input type="text" placeholder='Soyadınızı daxil edin' name='lastname' defaultValue={customerData?.lastname} />
-                            </div>
-                            <div className='input-group'>
-                                <label>E-mail</label>
-                                <input type="email" placeholder='nümunə@gmail.com' name='email' defaultValue={customerData?.email} />
-                            </div>
-                            <div className='input-group'>
-                                <label>Mobil nömrə</label>
-                                <input type="text" placeholder='070 - 000 - 00 - 00' name='phone' defaultValue={customerData?.phone} />
-                            </div>
-                            <button className='main-btn'>Məlumatları yenilə</button>
-                        </form>
+                        {
+                            !user.loading
+                                ? <form onSubmit={handleSubmit((data) => {
+                                    isDirty && dispatch(updateCustomer(data))
+                                })}>
+                                    <div className='input-group'>
+                                        <label>Ad </label>
+                                        <input {...register("firstname", { required: "Adınız qeyd edin" })} type="text" placeholder='Adınızı daxil edin' name='firstname' />
+                                        {errors.firstname && <span className='alert-message'>{errors.firstname.message}</span>}
+                                    </div>
+                                    <div className='input-group'>
+                                        <label>Soyad</label>
+                                        <input {...register("lastname", { required: "Soyadinizi qeyd edin" })} type="text" placeholder='Soyadınızı daxil edin' name='lastname' />
+                                        {errors.lastname && <span className='alert-message'>{errors.lastname.message}</span>}
+                                    </div>
+                                    <div className='input-group'>
+                                        <label>E-mail</label>
+                                        <input {...register("email", {
+                                            required: "Emailinizi qeyd edin",
+                                            pattern: {
+                                                value: /\S+@\S+\.\S+/,
+                                                message: "Email düzgün qeyd olunmayıb"
+                                            }
+                                        })} type="email" placeholder='nümunə@gmail.com' name='email' />
+                                        {errors.email && <span className='alert-message'>{errors.email.message}</span>}
+                                    </div>
+                                    <div className='input-group'>
+                                        <label>Mobil nömrə</label>
+                                        <InputMask
+                                            mask="999 999 99 99"
+                                            maskChar={null}
+                                            placeholder="050 000 00 00"
+                                            {...register("phone", { required: "Nömrənizi qeyd edin" })}
+                                        ></InputMask>
+                                        {errors.phone && <span className='alert-message'>{errors.phone.message}</span>}
+                                    </div>
+                                    <button className={`main-btn ${!isDirty ? 'btn-disabled' : ''}`}>Məlumatları yenilə</button>
+                                </form>
+                                : <div className='user-datas-loading'>
+                                    <img src={loading} alt="loading" />
+                                </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ import Search from '../Search/Search'
 import DropdownMenu from '../DropdownMenu/DropdownMenu'
 import { getCategories } from '../../redux/actions/categories'
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getCreateBasket, getUserBasketAsync } from '../../redux/actions/basket';
 
 const Header = () => {
@@ -18,7 +18,7 @@ const Header = () => {
     const [hoverCategoryId, setHoverCategoryId] = useState()
     const [navbarStatus, setNavbarStatus] = useState(false)
     const [openId, setOpenId] = useState()
-    const navigate = useNavigate();
+    const isLogin = localStorage.getItem('customerID')
 
     useEffect(() => {
         dispatch(getCategories())
@@ -64,14 +64,14 @@ const Header = () => {
                     </div>
                     <Search />
                     <div className='user_block'>
-                        <Link to='/signup' className='user_block-item'>
+                        <Link to={isLogin ? '/userprofile' : '/login'} className='user_block-item'>
                             <img src={person_icon} alt="person" />
                         </Link>
                         <Link to='/basket' className='user_block-item user_basket_icon'>
                             <img src={basket_icon} alt="basket" />
                             {
                                 !basket.loading
-                                    ? <div className='basket_product_count'>{basket?.basket?.total_items}</div>
+                                    ? <div className='basket_product_count'>{basket?.basket?.total_unique_items}</div>
                                     : <span className='basket_product_loading'><img src={loading} alt="loading" /></span>
                             }
                         </Link>
@@ -95,7 +95,7 @@ const Header = () => {
                                 categories?.categories[0]?.children?.map(category => {
                                     return (
                                         <li key={category?.id} onMouseOver={() => { gethoverCategoryId(category) }}>
-                                            <div onClick={() => { navigate(`/products/${category?.slug}`) }} >{category?.name}</div>
+                                            <Link to={`/products/${category?.slug}`} onClick={() => { setNavbarStatus(false) }} >{category?.name}</Link>
 
                                             {
                                                 category.children.length > 0
@@ -109,6 +109,7 @@ const Header = () => {
                                                         categories={category}
                                                         hoverCategoryId={hoverCategoryId}
                                                         openId={openId}
+                                                        setNavbarStatus={setNavbarStatus}
                                                     />
                                                 </>
                                             }

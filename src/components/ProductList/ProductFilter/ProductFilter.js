@@ -36,6 +36,10 @@ export default function ProductFilter() {
             value: 'HTC',
             query: 'htc',
         },
+        {
+            value: 'Oppo',
+            query: 'oppo',
+        },
     ]
 
     const [searchParams, setSearchParams] = useSearchParams({});

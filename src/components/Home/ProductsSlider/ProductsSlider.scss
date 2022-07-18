@@ -11,7 +11,7 @@
   justify-content: space-between;
   margin-bottom: 32px;
 
-  p {
+  a {
     font-size: $fs-medium;
     line-height: 1.6rem;
     display: flex;
@@ -51,7 +51,7 @@
     font-size: 1.6rem;
   }
 
-  .products-slider_title p {
+  .products-slider_title a {
     position: absolute;
     bottom: 12px;
     left: 50%;

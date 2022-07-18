@@ -41,15 +41,19 @@ const Basket = () => {
                                         return (
                                             <div key={item.id} className='item'>
                                                 <div className='item-details'>
-                                                    <div className='image'>
+                                                    <Link to={`/product-details/${item.product_id}`} className='image'>
                                                         <img src={item.image.url} alt="product" />
-                                                    </div>
+                                                    </Link>
                                                     <div className='item-static-details'>
                                                         <h3>{item.product_name}</h3>
                                                         <div className='item-variants'>
                                                             <p className='color'>
                                                                 <span>Rəng:</span>
                                                                 {item.selected_options[0].option_name}
+                                                            </p>
+                                                            <p className='color'>
+                                                                <span>Yaddaş:</span>
+                                                                {item.selected_options[1].option_name} GB
                                                             </p>
                                                             <p className='price'>{item.price.raw} AZN</p>
                                                         </div>

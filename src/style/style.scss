@@ -166,6 +166,16 @@ select {
   margin-top: 12px;
 }
 
+.select-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btn-disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 @media (max-width: $mobile) {
   .container {
     width: 90%;
