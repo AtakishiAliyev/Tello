@@ -82,7 +82,7 @@ const Basket = () => {
                                         )
                                     })
                                 }
-                                <Link to='/' className='checkout_btn d-none-desktop'>Checkout</Link>
+                                {/* <Link to='/' className='checkout_btn d-none-desktop'>Checkout</Link> */}
                             </div>
                             <div className='basket-total'>
                                 <h3>Ümumi</h3>

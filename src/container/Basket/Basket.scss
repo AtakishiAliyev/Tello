@@ -190,12 +190,20 @@
 }
 
 @media (max-width: $mobile) {
+  .basket-wrapper {
+    flex-direction: column;
+  }
+
   .basket-total {
-    display: none;
+    width: 90% !important;
+    order: 1;
+    margin-bottom: 32px;
+    padding: 16px !important;
   }
 
   .basket-items {
     width: 100% !important;
+    order: 2;
 
     .item {
       position: relative;
