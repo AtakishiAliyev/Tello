@@ -1,3 +1,3 @@
 #Tello
 
-[Live preview](https://tello.vercel.app/)
+[Live preview](https://tello.vercel.app)
