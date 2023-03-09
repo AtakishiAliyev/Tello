@@ -60,6 +60,9 @@ const ProductDetails = () => {
         }))
     }
 
+    const [checked, setChecked] = useState(false)
+    const iframeLink = productData?.description.replace('<p>', '').replace('</p>', '')
+
     return (
         <>
             <div className='product-details-content'>
@@ -70,10 +73,21 @@ const ProductDetails = () => {
                 }
                 <div className='container'>
                     <Breadcrumb breadcrumbData={breadcrumbData} />
+                    <div className='switch-product'>
+                        <input type="checkbox" onChange={(e) => { setChecked(e.target.checked) }} checked={checked} />
+                        Switch to {checked ? '3D model' : 'images'}
+                    </div>
                     <div className='product-details-wrapper'>
-                        <div className='product-images'>
-                            <Gallery assets={gallery} />
-                        </div>
+                        {
+                            !checked
+                                ? <div className='product-images'>
+                                    <Gallery assets={gallery} />
+                                </div>
+                                : <iframe
+                                    title="This is a unique title"
+                                    src={iframeLink}
+                                ></iframe>
+                        }
                         <div className='product-information'>
                             <h3 className='product-name'>{productData?.name}</h3>
                             <p className='price'>

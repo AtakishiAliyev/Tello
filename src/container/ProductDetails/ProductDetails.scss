@@ -3,7 +3,22 @@
 .product-details-content {
   position: relative;
   padding-bottom: 100px;
+
+  .switch-product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 26px;
+  }
+
+  iframe {
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
 }
+
 
 .product-details-wrapper {
   display: flex;
@@ -51,6 +66,7 @@
 
     .slick-next {
       right: 0;
+
       &::before {
         color: #333;
       }
@@ -58,6 +74,7 @@
 
     .slick-prev {
       left: 0;
+
       &::before {
         color: #333;
       }
